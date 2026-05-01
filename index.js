@@ -53,7 +53,7 @@ client.on('interactionCreate', async interaction => {
 // ─── PREFIX COMMANDS ────────────────────────────────────────────
 client.on('messageCreate', async message => {
   if (message.author.bot) return;
-  if (!message.content.startsWith(PREFIX)) return;
+  if (!message.content.toLowerCase().startsWith(PREFIX.toLowerCase())) return;
 
   const args = message.content.slice(PREFIX.length).trim().split(/\s+/);
   const commandName = args.shift().toLowerCase();
