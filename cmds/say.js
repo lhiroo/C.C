@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
+/*const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
 module.exports = {
   // Slash command
@@ -26,10 +26,9 @@ module.exports = {
     } else {
       text = ctx.args.slice(1).join(' ');
 
+      await ctx.send({ content: text });
       // suppression de la commande utilisateur
       await ctx.source.delete().catch(() => {});
-
-      await ctx.send({ content: text });
     }
   },
-};
+};*/
