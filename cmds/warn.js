@@ -9,7 +9,7 @@ module.exports = {
     .setName('warn')
     .setDescription('Avertit un membre')
     .addUserOption(o => o.setName('cible').setDescription('Membre').setRequired(true))
-    .addStringOption(o => o.setName('raison').setDescription('Raison').setRequired(true))
+    .addStringOption(o => o.setName('raison').setDescription('Raison').setRequired(false))
     .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers),
 
   name: 'warn',
