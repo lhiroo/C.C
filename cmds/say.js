@@ -1,34 +1,63 @@
-/*const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
 module.exports = {
-  // Slash command
   data: new SlashCommandBuilder()
     .setName('say')
-    .setDescription('Fait dire un message au bot')
+    .setDescription('Fait parler le bot')
     .addStringOption(o =>
-      o.setName('text')
-        .setDescription('Texte à envoyer')
-        .setRequired(true)
+      o.setName('message').setDescription('Message à envoyer').setRequired(true)
+    )
+    .addChannelOption(o =>
+      o.setName('salon').setDescription('Salon cible (salon actuel par défaut)')
     )
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
-  // Prefix command
   name: 'say',
-  usage: 'cc say [text]',
+  usage: 'cc  say [#salon] <message>',
 
   async execute(ctx) {
-    let text;
+    // ── Récupérer les paramètres ──────────────────────────────────
+    let texte, salon;
 
-    // Récupération du texte selon le type de commande
     if (ctx.isSlash) {
-      text = ctx.source.options.getString('text');
-      await ctx.source.reply({ content: text });
+      texte = ctx.source.options.getString('message');
+      salon = ctx.source.options.getChannel('salon') ?? ctx.channel;
     } else {
-      text = ctx.args.slice(1).join(' ');
+      salon = ctx.source.mentions.channels.first() ?? ctx.channel;
 
-      await ctx.send({ content: text });
-      // suppression de la commande utilisateur
-      await ctx.source.delete().catch(() => {});
+      // Retirer la mention du channel du message si elle est présente
+      texte = ctx.source.content
+        .slice(ctx.source.content.indexOf(ctx.args[0]) - 0)  // après le prefix+commande
+        .replace(/<#\d+>/g, '')  // supprimer la mention #salon
+        .trim();
+
+      // Reconstruire proprement depuis les args
+      texte = ctx.args
+        .filter(a => !a.startsWith('<#'))  // ignorer la mention channel
+        .join(' ')
+        .trim();
+    }
+
+    if (!texte) return ctx.replyEphemeral('❌ Le message est vide.');
+
+    // ── Vérifier que le bot peut écrire dans le salon cible ──────
+    const botMember = ctx.guild.members.me;
+    if (!salon.permissionsFor(botMember).has(PermissionFlagsBits.SendMessages)) {
+      return ctx.replyEphemeral(`❌ Je n'ai pas la permission d'écrire dans <#${salon.id}>.`);
+    }
+
+    // ── Envoyer le message ────────────────────────────────────────
+    await salon.send(texte);
+
+    // ── Supprimer la commande de l'utilisateur ───────────────────
+    if (ctx.isSlash) {
+      // Slash : répondre en éphémère pour accuser réception puis c'est tout
+      await ctx.replyEphemeral(`✅ Message envoyé dans <#${salon.id}>.`);
+    } else {
+      // Prefix : supprimer le message original
+      await ctx.source.delete().catch(() => {
+        // Silencieux si le bot n'a pas la permission ManageMessages
+      });
     }
   },
-};*/
+};
