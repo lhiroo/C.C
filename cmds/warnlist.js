@@ -14,6 +14,19 @@ module.exports = {
   usage: 'cc warnlist @utilisateur',
 
   async execute(ctx) {
+
+    if (!ctx.member.permissions.has(PermissionFlagsBits.ModerateMembers)) {
+      const confirmation = await ctx.reply(
+        "❌ Tu n'as pas les permissions nécessaires."
+      );
+
+      setTimeout(() => {
+        confirmation.delete().catch(() => {});
+      }, 4000);
+
+      return;
+    }
+
     const cible = ctx.isSlash ? ctx.source.options.getUser('cible') : ctx.source.mentions.users.first();
     if (!cible) return ctx.reply('❌ Mentionne un utilisateur.');
 

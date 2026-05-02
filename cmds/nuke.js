@@ -9,6 +9,19 @@ module.exports = {
   name: 'nuke',
 
   async execute(ctx) {
+
+    if (!ctx.member.permissions.has(PermissionFlagsBits.ManageChannels)) {
+      const confirmation = await ctx.reply(
+        "❌ Tu n'as pas les permissions nécessaires."
+      );
+
+      setTimeout(() => {
+        confirmation.delete().catch(() => {});
+      }, 4000);
+
+      return;
+    }
+
     const channel = ctx.channel;
 
     // Cloner le salon (garde les permissions, le nom, la position, etc.)

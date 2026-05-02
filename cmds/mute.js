@@ -32,6 +32,19 @@ module.exports = {
   usage: 'cc mute @utilisateur 10m [raison]',
 
   async execute(ctx) {
+
+    if (!ctx.member.permissions.has(PermissionFlagsBits.ModerateMembers)) {
+      const confirmation = await ctx.reply(
+        "❌ Tu n'as pas les permissions nécessaires."
+      );
+
+      setTimeout(() => {
+        confirmation.delete().catch(() => {});
+      }, 4000);
+
+      return;
+    }
+
     const cible    = ctx.isSlash ? ctx.source.options.getUser('cible')    : ctx.source.mentions.users.first();
     const dureeKey = ctx.isSlash ? ctx.source.options.getString('duree')  : ctx.args[1];
     const raison   = ctx.isSlash ? ctx.source.options.getString('raison') : ctx.args.slice(2).join(' ') || 'Aucune raison';

@@ -13,6 +13,19 @@ module.exports = {
   usage: 'cc ban @utilisateur [raison]',
 
   async execute(ctx) {
+
+    if (!ctx.member.permissions.has(PermissionsBitField.Flags.BanMembers)) {
+      const confirmation = await ctx.reply(
+        "❌ Tu n'as pas les permissions nécessaires."
+      );
+
+      setTimeout(() => {
+        confirmation.delete().catch(() => {});
+      }, 4000);
+
+      return;
+    }
+
     const cible  = ctx.isSlash ? ctx.source.options.getUser('cible')         : ctx.source.mentions.users.first();
     const raison = ctx.isSlash ? ctx.source.options.getString('raison')       : ctx.args.slice(1).join(' ') || 'Aucune raison';
     const jours  = ctx.isSlash ? (ctx.source.options.getInteger('jours') ?? 0): 0;

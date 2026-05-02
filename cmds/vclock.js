@@ -17,6 +17,19 @@ module.exports = {
   name: 'vclock',
 
   async execute(ctx) {
+
+    if (!ctx.member.permissions.has(PermissionFlagsBits.ManageChannels)) {
+      const confirmation = await ctx.reply(
+        "❌ Tu n'as pas les permissions nécessaires."
+      );
+
+      setTimeout(() => {
+        confirmation.delete().catch(() => {});
+      }, 4000);
+
+      return;
+    }
+
     await ctx.defer();
 
     const action = ctx.isSlash ? ctx.source.options.getString('action') : ctx.args[0];

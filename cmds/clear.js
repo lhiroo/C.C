@@ -15,29 +15,71 @@ module.exports = {
   usage: 'cc clear 10 [@utilisateur]',
 
   async execute(ctx) {
-    const nombre = ctx.isSlash ? ctx.source.options.getInteger('nombre')+1 : parseInt(ctx.args[0])+1;
-    const filtre = ctx.isSlash ? ctx.source.options.getUser('filtre')    : ctx.source.mentions.users.first();
 
-    if (!nombre || nombre < 1 || nombre > 100) {
+    if (!ctx.member.permissions.has(PermissionFlagsBits.ManageMessages)) {
+      const confirmation = await ctx.reply(
+        "❌ Tu n'as pas les permissions nécessaires."
+      );
+
+      setTimeout(() => {
+        confirmation.delete().catch(() => {});
+      }, 4000);
+
+      return;
+    }
+
+    // Récupération du nombre
+    const nombre = ctx.isSlash
+      ? ctx.source.options.getInteger('nombre')
+      : parseInt(ctx.args[0]);
+
+    // Récupération du filtre utilisateur
+    const filtre = ctx.isSlash
+      ? ctx.source.options.getUser('filtre')
+      : ctx.source.mentions.users.first();
+
+    // Vérification du nombre
+    if (isNaN(nombre) || nombre < 1 || nombre > 100) {
       return ctx.reply('❌ Indique un nombre entre 1 et 100.');
     }
 
-    // Fetch les messages
-    let messages = await ctx.channel.messages.fetch({ limit: nombre });
+    // Fetch messages
+    let messages = await ctx.channel.messages.fetch({
+      limit: nombre + 1 // +1 pour inclure la commande
+    });
 
-    // Filtrer par auteur si demandé
+    // Filtre utilisateur
     if (filtre) {
-      messages = messages.filter(m => m.author.id === filtre.id);
+      messages = messages.filter(
+        m => m.author.id === filtre.id
+      );
     }
 
-    // Discord ne peut pas supprimer les messages de plus de 14 jours en masse
-    const recents = messages.filter(m => Date.now() - m.createdTimestamp < 14 * 24 * 60 * 60 * 1000);
+    // Messages récents uniquement (<14 jours)
+    const recents = messages.filter(
+      m => Date.now() - m.createdTimestamp < 14 * 24 * 60 * 60 * 1000
+    );
 
-    const deleted = await ctx.channel.bulkDelete(recents, true);
+    // Vérification si vide
+    if (recents.size === 0) {
+      return ctx.reply(
+        "❌ Aucun message récent à supprimer."
+      );
+    }
 
-    const confirmation = await ctx.reply(`🗑️ **${deleted.size}** message(s) supprimé(s).`);
+    // Suppression
+    const deleted = await ctx.channel.bulkDelete(
+      recents,
+      true
+    );
 
-    // Auto-supprimer le message de confirmation après 4s
-    setTimeout(() => confirmation.delete().catch(() => {}), 4000);
-  },
-};
+    // Confirmation
+    const confirmation = await ctx.reply(
+      `🗑️ **${deleted.size}** message(s) supprimé(s).`
+    );
+
+    setTimeout(() => {
+      confirmation.delete().catch(() => {});
+    }, 4000);
+  }
+}

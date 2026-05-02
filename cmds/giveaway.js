@@ -21,6 +21,19 @@ module.exports = {
   name: 'giveaway',
 
   async execute(ctx) {
+
+    if (!ctx.member.permissions.has(PermissionFlagsBits.ManageGuild)) {
+      const confirmation = await ctx.reply(
+        "❌ Tu n'as pas les permissions nécessaires."
+      );
+
+      setTimeout(() => {
+        confirmation.delete().catch(() => {});
+      }, 4000);
+
+      return;
+    }
+
     await ctx.defer({ ephemeral: true });
 
     const lot       = ctx.isSlash ? ctx.source.options.getString('lot')          : ctx.args.join(' ');

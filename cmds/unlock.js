@@ -10,6 +10,19 @@ module.exports = {
   name: 'unlock',
 
   async execute(ctx) {
+
+    if (!ctx.member.permissions.has(PermissionFlagsBits.ManageChannels)) {
+      const confirmation = await ctx.reply(
+        "❌ Tu n'as pas les permissions nécessaires."
+      );
+
+      setTimeout(() => {
+        confirmation.delete().catch(() => {});
+      }, 4000);
+
+      return;
+    }
+
     const salon = ctx.isSlash ? (ctx.source.options.getChannel('salon') ?? ctx.channel) : ctx.channel;
 
     await salon.permissionOverwrites.edit(ctx.guild.roles.everyone, {

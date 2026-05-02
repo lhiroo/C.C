@@ -13,6 +13,19 @@ module.exports = {
   name: 'vclimit',
 
   async execute(ctx) {
+
+    if (!ctx.member.permissions.has(PermissionFlagsBits.ManageChannels)) {
+      const confirmation = await ctx.reply(
+        "❌ Tu n'as pas les permissions nécessaires."
+      );
+
+      setTimeout(() => {
+        confirmation.delete().catch(() => {});
+      }, 4000);
+
+      return;
+    }
+
     await ctx.defer();
 
     const limite = ctx.isSlash ? ctx.source.options.getInteger('limite') : parseInt(ctx.args[0]);

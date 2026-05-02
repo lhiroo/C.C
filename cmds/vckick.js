@@ -11,6 +11,19 @@ module.exports = {
   name: 'vckick',
 
   async execute(ctx) {
+
+    if (!ctx.member.permissions.has(PermissionFlagsBits.MoveMembers)) {
+      const confirmation = await ctx.reply(
+        "❌ Tu n'as pas les permissions nécessaires."
+      );
+
+      setTimeout(() => {
+        confirmation.delete().catch(() => {});
+      }, 4000);
+
+      return;
+    }
+
     await ctx.defer();
 
     const cible  = ctx.isSlash ? ctx.source.options.getMember('cible')    : ctx.source.mentions.members.first();
