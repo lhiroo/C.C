@@ -15,19 +15,16 @@ function buildCtx(source, args = []) {
 
     async replyEphemeral(content) {
       if (isSlash) {
-        return source.reply({
-          content,
-          flags: MessageFlags.Ephemeral, // ← fix du warning
-        });
+        return source.reply({ content, flags: MessageFlags.Ephemeral });
       }
       return source.author.send(content).catch(() => {});
     },
 
     async defer(ephemeral = false) {
       if (isSlash) {
-        return source.deferReply(
-          ephemeral ? { flags: MessageFlags.Ephemeral } : {}
-        );
+        // ← Guard : ne pas defer si déjà acquittée
+        if (source.deferred || source.replied) return;
+        return source.deferReply(ephemeral ? { flags: MessageFlags.Ephemeral } : {});
       }
       this._thinkingMsg = await source.reply('⏳ Traitement en cours...').catch(() => null);
     },
