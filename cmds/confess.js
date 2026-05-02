@@ -9,7 +9,7 @@ module.exports = {
   name: 'confess',
 
   async execute(ctx) {
-    await ctx.defer({ ephemeral: true });
+    await ctx.defer(true);
 
     const texte = ctx.isSlash
       ? ctx.source.options.getString('confession')

@@ -34,7 +34,7 @@ module.exports = {
       return;
     }
 
-    await ctx.defer({ ephemeral: true });
+    await ctx.defer(true);
 
     const lot       = ctx.isSlash ? ctx.source.options.getString('lot')          : ctx.args.join(' ');
     const dureeStr  = ctx.isSlash ? ctx.source.options.getString('duree')         : '1h';
