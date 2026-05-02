@@ -17,7 +17,6 @@ module.exports = {
 
     if (!texte) return ctx.editReply('❌ Écris quelque chose.');
 
-    // Chercher un salon nommé "confessions"
     const salon = ctx.guild.channels.cache.find(
       c => c.name.toLowerCase().includes('confession') && c.isTextBased()
     );
@@ -34,16 +33,13 @@ module.exports = {
       .setFooter({ text: 'Confession anonyme' });
 
     await salon.send({ embeds: [embed] });
+
+    // Une seule réponse — editReply car on a defer(true) au début
     await ctx.editReply(`✅ Ta confession a été envoyée dans <#${salon.id}>.`);
-        // ── Supprimer la commande de l'utilisateur ───────────────────
-    if (ctx.isSlash) {
-      // Slash : répondre en éphémère pour accuser réception puis c'est tout
-      await ctx.replyEphemeral(`✅ Message envoyé dans <#${salon.id}>.`);
-    } else {
-      // Prefix : supprimer le message original
-      await ctx.source.delete().catch(() => {
-        // Silencieux si le bot n'a pas la permission ManageMessages
-      });
+
+    // Prefix : supprimer le message original
+    if (!ctx.isSlash) {
+      await ctx.source.delete().catch(() => {});
     }
   },
 };
