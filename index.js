@@ -94,7 +94,7 @@ client.on('messageCreate', async message => {
 });
 
 // ─── Prêt ────────────────────────────────────────────────────────
-client.once('ready', () => {
+client.once('clientReady', () => {
   console.log(`✅ ${client.user.tag} est en ligne`);
   console.log(`📡 Connecté sur ${client.guilds.cache.size} serveur(s)`);
 });

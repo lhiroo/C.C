@@ -15,7 +15,7 @@ module.exports = {
   usage: 'cc clear 10 [@utilisateur]',
 
   async execute(ctx) {
-    const nombre = ctx.isSlash ? ctx.source.options.getInteger('nombre') : parseInt(ctx.args[0]);
+    const nombre = ctx.isSlash ? ctx.source.options.getInteger('nombre')+1 : parseInt(ctx.args[0])+1;
     const filtre = ctx.isSlash ? ctx.source.options.getUser('filtre')    : ctx.source.mentions.users.first();
 
     if (!nombre || nombre < 1 || nombre > 100) {
