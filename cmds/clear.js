@@ -16,7 +16,7 @@ module.exports = {
 
   async execute(ctx) {
 
-    if (!ctx.member.permissions.has(PermissionFlagsBits.ManageMessages)) {
+    if (!ctx.source?.member?.permissions?.has(PermissionFlagsBits.ManageMessages)) {
       const confirmation = await ctx.reply(
         "❌ Tu n'as pas les permissions nécessaires."
       );

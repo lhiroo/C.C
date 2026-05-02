@@ -16,6 +16,17 @@ module.exports = {
   usage: 'cc  say [#salon] <message>',
 
   async execute(ctx) {
+    if (!ctx.source?.member?.permissions?.has(PermissionFlagsBits.Administrator)) {
+      const confirmation = await ctx.reply(
+        "❌ Tu n'as pas les permissions nécessaires."
+      );
+
+      setTimeout(() => {
+        confirmation.delete().catch(() => {});
+      }, 4000);
+
+      return;
+    }
     // ── Récupérer les paramètres ──────────────────────────────────
     let texte, salon;
 

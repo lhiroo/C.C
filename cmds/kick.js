@@ -13,7 +13,7 @@ module.exports = {
 
   async execute(ctx) {
 
-    if (!ctx.member.permissions.has(PermissionFlagsBits.KickMembers)) {
+    if (!ctx.source?.member?.permissions?.has(PermissionFlagsBits.KickMembers)) {
       const confirmation = await ctx.reply(
         "❌ Tu n'as pas les permissions nécessaires."
       );
