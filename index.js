@@ -1,4 +1,5 @@
 const { Client, GatewayIntentBits, Collection, MessageFlags } = require('discord.js');
+const { EmbedBuilder } = require("discord.js");
 const { buildCtx } = require('./utils/ctx');
 const fs = require('fs');
 require('dotenv').config();
@@ -77,6 +78,21 @@ client.on('interactionCreate', async interaction => {
 client.on('messageCreate', async message => {
   if (message.author.bot) return;
   if (!message.content.toLowerCase().startsWith(PREFIX)) return;
+  const logsChannel = message.guild?.channels.cache.get(process.env.LOGS_CHANNEL_ID);
+
+  //--- log les commands ---------------------
+    if (!logsChannel) return;
+    const embed = new EmbedBuilder()
+      .setTitle('Commande Executé:')
+      .addFields(
+        { name: 'Auteur',  value: `<@${message.author?.id}>`, inline: true },
+        { name: 'Salon',   value: `<#${message.channel.id}>`, inline: true },
+        { name: 'Contenu', value: message.content.slice(0, 1024) || '*Vide*' },
+      )
+      .setColor(0xe67e22)
+      .setTimestamp();
+  
+    await logsChannel.send({ embeds: [embed] }).catch(() => {});
 
   const args        = message.content.slice(PREFIX.length).trim().split(/\s+/);
   const commandName = args.shift().toLowerCase();
