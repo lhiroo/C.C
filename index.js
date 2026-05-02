@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, Collection } = require('discord.js');
+const { Client, GatewayIntentBits, Collection, MessageFlags } = require('discord.js');
 const { buildCtx } = require('./utils/ctx');
 const fs = require('fs');
 require('dotenv').config();
@@ -9,29 +9,38 @@ const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent, // obligatoire pour les prefix commands
+    GatewayIntentBits.GuildVoiceStates,
+    GatewayIntentBits.MessageContent,
   ],
 });
 
-// Charger toutes les commandes
 client.commands = new Collection();
 const commandFiles = fs.readdirSync('./cmds').filter(f => f.endsWith('.js'));
 
 for (const file of commandFiles) {
   const cmd = require(`./cmds/${file}`);
-  client.commands.set(cmd.name, cmd);         // indexé par nom principal
-
-  // Indexer les aliases aussi
+  client.commands.set(cmd.name, cmd);
   if (cmd.aliases) {
-    for (const alias of cmd.aliases) {
-      client.commands.set(alias, cmd);
-    }
+    for (const alias of cmd.aliases) client.commands.set(alias, cmd);
   }
 }
 
-// ─── SLASH COMMANDS ────────────────────────────────────────────
+const eventFiles = fs.readdirSync('./events').filter(f => f.endsWith('.js'));
+for (const file of eventFiles) {
+  const event = require(`./events/${file}`);
+  client.on(event.name, (...args) => event.execute(...args, client));
+}
+
+// ─── SLASH ──────────────────────────────────────────────────────
 client.on('interactionCreate', async interaction => {
   if (!interaction.isChatInputCommand()) return;
+
+  // ← Ignorer les interactions de plus de 2.5s (token déjà quasi expiré)
+  const age = Date.now() - interaction.createdTimestamp;
+  if (age > 2500) {
+    console.warn(`[Interaction ignorée] /${interaction.commandName} trop vieille (${age}ms)`);
+    return;
+  }
 
   const command = client.commands.get(interaction.commandName);
   if (!command) return;
@@ -40,20 +49,24 @@ client.on('interactionCreate', async interaction => {
     const ctx = buildCtx(interaction);
     await command.execute(ctx);
   } catch (err) {
-    console.error(err);
-    const payload = { content: '❌ Erreur.', ephemeral: true };
-    if (interaction.replied || interaction.deferred) {
-      await interaction.followUp(payload);
-    } else {
-      await interaction.reply(payload);
+    console.error(`[Erreur commande /${interaction.commandName}]`, err);
+
+    const payload = { content: '❌ Une erreur est survenue.', flags: MessageFlags.Ephemeral };
+
+    try {
+      if (interaction.replied)       await interaction.followUp(payload);
+      else if (interaction.deferred) await interaction.editReply(payload);
+      else                           await interaction.reply(payload);
+    } catch (e) {
+      console.warn('[Handler] Réponse impossible :', e.message);
     }
   }
 });
 
-// ─── PREFIX COMMANDS ────────────────────────────────────────────
+// ─── PREFIX ─────────────────────────────────────────────────────
 client.on('messageCreate', async message => {
   if (message.author.bot) return;
-  if (!message.content.toLowerCase().startsWith(PREFIX.toLowerCase())) return;
+  if (!message.content.startsWith(PREFIX)) return;
 
   const args = message.content.slice(PREFIX.length).trim().split(/\s+/);
   const commandName = args.shift().toLowerCase();
@@ -65,11 +78,10 @@ client.on('messageCreate', async message => {
     const ctx = buildCtx(message, args);
     await command.execute(ctx);
   } catch (err) {
-    console.error(err);
-    message.reply('❌ Erreur.');
+    console.error(`[Erreur commande cc ${commandName}]`, err);
+    message.reply('❌ Une erreur est survenue.').catch(() => {});
   }
 });
 
-// ───────────────────────────────────────────────────────────────
 client.once('ready', () => console.log(`✅ ${client.user.tag} en ligne`));
 client.login(process.env.TOKEN);
