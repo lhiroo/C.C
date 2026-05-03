@@ -5,6 +5,16 @@ require('dotenv').config();
 
 const PREFIX = 'cc ';
 
+// Empêcher les erreurs EPIPE de crash le process
+process.on('uncaughtException', err => {
+  if (err.code === 'EPIPE') return; // ignorer silencieusement
+  console.error('[Uncaught Exception]', err);
+});
+
+process.on('unhandledRejection', (reason) => {
+  console.error('[Unhandled Rejection]', reason);
+});
+
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
