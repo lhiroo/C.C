@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, Collection, MessageFlags, EmbedBuilder } = require('discord.js');
+const { Client, GatewayIntentBits, Collection, MessageFlags, EmbedBuilder, Partials } = require('discord.js');
 const { buildCtx } = require('./utils/ctx');
 const fs = require('fs');
 require('dotenv').config();
@@ -20,8 +20,12 @@ const client = new Client({
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.GuildVoiceStates,
+    GatewayIntentBits.DirectMessages,
     GatewayIntentBits.MessageContent,
   ],
+  partials: [
+    Partials.Channel
+  ]
 });
 
 // ─── Chargement des commandes ────────────────────────────────────
