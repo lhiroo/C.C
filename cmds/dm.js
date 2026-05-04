@@ -18,22 +18,48 @@ module.exports = {
   async execute(ctx) {
     await ctx.defer(true);
 
-    // Vérification permission (redondant avec setDefaultMemberPermissions mais sécurisé)
     if (!ctx.source.member.permissions.has(PermissionFlagsBits.Administrator)) {
       return ctx.editReply('❌ Tu n\'as pas les permissions nécessaires.');
     }
 
     const cible   = ctx.isSlash ? ctx.source.options.getUser('cible')     : ctx.source.mentions.users.first();
     const contenu = ctx.isSlash ? ctx.source.options.getString('contenu') : ctx.args.filter(a => !a.startsWith('<@')).join(' ');
+    const auteur  = ctx.user;
 
     if (!contenu) return ctx.editReply('❌ Le contenu du DM est vide.');
 
+    // Helper : DM à l'auteur puis supprimer toute trace dans le chat
+    async function finir(texte) {
+  try {
+    const dm = await auteur.createDM();
+    await dm.send(texte);
+
+    // Supprimer la réponse slash
+    await ctx.source.deleteReply().catch(() => {});
+
+    // ← Supprimer le message "Traitement en cours..." des prefix commands
+    if (!ctx.isSlash && ctx._thinkingMsg) {
+      await ctx._thinkingMsg.delete().catch(() => {});
+    }
+
+    // Supprimer le message original de l'utilisateur
+    if (!ctx.isSlash) await ctx.source.delete().catch(() => {});
+
+  } catch {
+      console.log('catched')
+
+      if (!ctx.isSlash && ctx._thinkingMsg) {
+        await ctx._thinkingMsg.delete().catch(() => {});
+    }
+      if (!ctx.isSlash) await ctx.source.delete().catch(() => {});
+      
+  }
+}
+
     // ── DM à tout le serveur ──────────────────────────────────────
     if (!cible) {
-      await ctx.editReply('📨 Envoi en cours à tous les membres...');
-
       await ctx.guild.members.fetch();
-      const membres = ctx.guild.members.cache.filter(m => !m.user.bot);
+      const membres = ctx.guild.members.cache.filter(m => !m.user.bot && m.id !== auteur.id);
 
       let success = 0;
       let failed  = 0;
@@ -48,9 +74,10 @@ module.exports = {
         }
       }
 
-      return ctx.editReply(
-        `✅ DM envoyé à **${success}** membre(s).\n` +
-        (failed > 0 ? `❌ Échec pour **${failed}** membre(s) (DMs fermés).` : '')
+      return finir(
+        `📨 **DM serveur envoyé** sur **${ctx.guild.name}**\n\n` +
+        `✅ Succès : **${success}** membre(s)\n` +
+        (failed > 0 ? `❌ Échec : **${failed}** membre(s) (DMs fermés)` : '')
       );
     }
 
@@ -60,12 +87,11 @@ module.exports = {
 
     try {
       await member.send(contenu);
-
-      if (!ctx.isSlash) {
-        await ctx.source.delete().catch(() => {});
-      }
-
-      return ctx.editReply(`✅ DM envoyé à **${member.user.tag}**.`);
+      return finir(
+        `📨 **DM envoyé** sur **${ctx.guild.name}**\n\n` +
+        `👤 Destinataire : **${member.user.tag}**\n` +
+        `💬 Message : ${contenu.slice(0, 200)}${contenu.length > 200 ? '...' : ''}`
+      );
     } catch {
       return ctx.editReply(`❌ Impossible d'envoyer un DM à **${member.user.tag}** (DMs fermés).`);
     }

@@ -176,59 +176,68 @@ class MusicQueue {
   }
 
   async getOrCreate(guild, voiceChannel, textChannel) {
-    if (this.queues.has(guild.id)) return this.queues.get(guild.id);
+  if (this.queues.has(guild.id)) return this.queues.get(guild.id);
 
-    const connection = joinVoiceChannel({
-      channelId:      voiceChannel.id,
-      guildId:        guild.id,
-      adapterCreator: guild.voiceAdapterCreator,
-      selfDeaf:       true,
-    });
+  // Vérifier les permissions avant de tenter la connexion
+  const perms = voiceChannel.permissionsFor(guild.members.me);
+  if (!perms?.has('Connect') || !perms?.has('Speak')) {
+    throw new Error('Permission manquante : Connect ou Speak.');
+  }
 
+  const connection = joinVoiceChannel({
+    channelId:      voiceChannel.id,
+    guildId:        guild.id,
+    adapterCreator: guild.voiceAdapterCreator,
+    selfDeaf:       true,
+  });
+
+  // Si déjà Ready, pas besoin d'attendre
+  if (connection.state.status !== VoiceConnectionStatus.Ready) {
     try {
-      await entersState(connection, VoiceConnectionStatus.Ready, 20_000);
+      await entersState(connection, VoiceConnectionStatus.Ready, 30_000);
     } catch {
       connection.destroy();
       throw new Error('Impossible de rejoindre le salon vocal.');
     }
-
-    const player = createAudioPlayer({
-      behaviors: { noSubscriber: NoSubscriberBehavior.Pause },
-    });
-
-    connection.subscribe(player);
-
-    const queue = {
-      guild, voiceChannel, textChannel,
-      connection, player,
-      tracks:  [],
-      current: null,
-      volume:  80,
-      loop:    'off',
-      paused:  false,
-    };
-
-    this.queues.set(guild.id, queue);
-
-    player.on(AudioPlayerStatus.Idle, () => this._playNext(guild.id));
-    player.on('error', err => {
-      console.error('[Music] Erreur player:', err.message);
-      this._playNext(guild.id);
-    });
-
-    connection.on(VoiceConnectionStatus.Disconnected, async () => {
-      try {
-        await Promise.race([
-          entersState(connection, VoiceConnectionStatus.Signalling, 5_000),
-          entersState(connection, VoiceConnectionStatus.Connecting,  5_000),
-        ]);
-      } catch { this.destroy(guild.id); }
-    });
-
-    connection.on(VoiceConnectionStatus.Destroyed, () => this.destroy(guild.id));
-
-    return queue;
   }
+
+  const player = createAudioPlayer({
+    behaviors: { noSubscriber: NoSubscriberBehavior.Pause },
+  });
+
+  connection.subscribe(player);
+
+  const queue = {
+    guild, voiceChannel, textChannel,
+    connection, player,
+    tracks:  [],
+    current: null,
+    volume:  80,
+    loop:    'off',
+    paused:  false,
+  };
+
+  this.queues.set(guild.id, queue);
+
+  player.on(AudioPlayerStatus.Idle, () => this._playNext(guild.id));
+  player.on('error', err => {
+    console.error('[Music] Erreur player:', err.message);
+    this._playNext(guild.id);
+  });
+
+  connection.on(VoiceConnectionStatus.Disconnected, async () => {
+    try {
+      await Promise.race([
+        entersState(connection, VoiceConnectionStatus.Signalling, 5_000),
+        entersState(connection, VoiceConnectionStatus.Connecting,  5_000),
+      ]);
+    } catch { this.destroy(guild.id); }
+  });
+
+  connection.on(VoiceConnectionStatus.Destroyed, () => this.destroy(guild.id));
+
+  return queue;
+}
 
   async _playNext(guildId) {
     const queue = this.queues.get(guildId);

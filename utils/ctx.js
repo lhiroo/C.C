@@ -3,10 +3,11 @@ const { MessageFlags } = require('discord.js');
 function buildCtx(source, args = []) {
   const isSlash = source.isChatInputCommand?.();
 
-  return {
+  const ctxObj = {
     args,
     isSlash,
     source,
+    _thinkingMsg: null,
 
     async reply(content) {
       if (isSlash) return source.reply(typeof content === 'string' ? { content } : content);
@@ -22,22 +23,30 @@ function buildCtx(source, args = []) {
 
     async defer(ephemeral = false) {
       if (isSlash) {
-        // ← Guard : ne pas defer si déjà acquittée
         if (source.deferred || source.replied) return;
         return source.deferReply(ephemeral ? { flags: MessageFlags.Ephemeral } : {});
       }
-      this._thinkingMsg = await source.reply('⏳ Traitement en cours...').catch(() => null);
+      ctxObj._thinkingMsg = await source.reply('⏳ Traitement en cours...').catch(() => null);
     },
 
     async editReply(content) {
-      if (isSlash) return source.editReply(typeof content === 'string' ? { content } : content);
-      if (this._thinkingMsg) return this._thinkingMsg.edit(content);
+      if (isSlash) {
+        return source.editReply(typeof content === 'string' ? { content } : content);
+      }
+      if (ctxObj._thinkingMsg) {
+        const payload = typeof content === 'string'
+          ? { content }
+          : { content: '', ...content };
+        return ctxObj._thinkingMsg.edit(payload);
+      }
     },
 
     get guild()   { return source.guild; },
     get channel() { return source.channel; },
     get user()    { return isSlash ? source.user : source.author; },
   };
+
+  return ctxObj;
 }
 
 module.exports = { buildCtx };
