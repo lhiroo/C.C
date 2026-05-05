@@ -36,7 +36,8 @@ async function ytdlpInfo(url) {
     '--dump-json',
     '--no-playlist',
     '--quiet',
-    '--js-runtimes', 'nodejs',
+    '--js-runtimes', 'node',
+    '--cookies', 'cookies.txt',
   ]);
   return JSON.parse(json);
 }
@@ -49,7 +50,8 @@ async function ytdlpSearch(query) {
     '--dump-json',
     '--no-playlist',
     '--quiet',
-    '--js-runtimes', 'nodejs',
+    '--js-runtimes', 'node',
+    '--cookies', 'cookies.txt',
   ]);
   return JSON.parse(json);
 }
@@ -64,7 +66,8 @@ function createYtStream(url) {
   const ytdlpProc = spawn(BINARY_PATH, [
     '--no-playlist',
     '--quiet',
-    '--js-runtimes', 'nodejs',
+    '--js-runtimes', 'node',
+    '--cookies', 'cookies.txt',
     '-f', 'bestaudio/best',
     '-o', '-',
     url,
