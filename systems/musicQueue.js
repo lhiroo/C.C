@@ -8,6 +8,7 @@ const {
   StreamType,
   entersState,
 } = require('@discordjs/voice');
+const { ytdlpInfo, ytdlpSearch, createYtStream } = require('./ytdlp');
 const { spawn } = require('child_process');
 const path      = require('path');
 const https     = require('https');
@@ -17,8 +18,8 @@ try { require('@discordjs/opus'); } catch {
 }
 
 // Chemin vers yt-dlp et ffmpeg
-const YTDLP_PATH  = path.join(process.cwd(), 'yt-dlp.exe');
-const FFMPEG_PATH = (() => { try { return require('ffmpeg-static'); } catch { return 'ffmpeg'; } })();
+//const YTDLP_PATH  = path.join(process.cwd(), 'yt-dlp.exe');
+//const FFMPEG_PATH = (() => { try { return require('ffmpeg-static'); } catch { return 'ffmpeg'; } })();
 
 // ── Helpers URL ────────────────────────────────────────────────
 function normalizeYoutubeUrl(input) {
@@ -51,7 +52,7 @@ function isYoutubeUrl(str) {
 }
 
 // ── yt-dlp : récupérer les infos d'une vidéo ──────────────────
-function ytdlpInfo(url) {
+/*function ytdlpInfo(url) {
   return new Promise((resolve, reject) => {
     const proc = spawn(YTDLP_PATH, [
       '--dump-json',
@@ -143,7 +144,7 @@ function createYtStream(url) {
   ffmpeg.on('error', () => {});
 
   return ffmpeg.stdout;
-}
+}*/
 
 // ── Embed Now Playing ──────────────────────────────────────────
 function buildNowPlayingEmbed(track, queue) {
