@@ -75,7 +75,7 @@ module.exports = {
 
     // Confirmation
     const confirmation = await ctx.channel.send(
-  `🗑️ **${deleted.size}** message(s) supprimé(s).`
+  `🗑️ **${deleted.size-1}** message(s) supprimé(s).`
 );
 
     setTimeout(() => {

@@ -1,63 +1,80 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
-const DUREES = {
-  '60s':  60 * 1000,
-  '5m':   5  * 60 * 1000,
-  '10m':  10 * 60 * 1000,
-  '1h':   60 * 60 * 1000,
-  '24h':  24 * 60 * 60 * 1000,
-  '7j':   7  * 24 * 60 * 60 * 1000,
-};
+const UNITES = { s: 1000, m: 60000, h: 3600000, j: 86400000 };
+
+function parseDuree(str) {
+  if (!str) return null;
+  const match = str.match(/^(\d+)(s|m|h|j)$/);
+  if (!match) return null;
+  return parseInt(match[1]) * UNITES[match[2]];
+}
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('mute')
     .setDescription('Met un membre en sourdine temporaire')
-    .addUserOption(o => o.setName('cible').setDescription('Membre').setRequired(true))
-    .addStringOption(o =>
-      o.setName('duree').setDescription('Durée').setRequired(true)
-       .addChoices(
-         { name: '60 secondes', value: '60s' },
-         { name: '5 minutes',   value: '5m'  },
-         { name: '10 minutes',  value: '10m' },
-         { name: '1 heure',     value: '1h'  },
-         { name: '24 heures',   value: '24h' },
-         { name: '7 jours',     value: '7j'  },
-       )
+    .addUserOption(o =>
+      o.setName('cible')
+        .setDescription('Membre')
+        .setRequired(true)
     )
-    .addStringOption(o => o.setName('raison').setDescription('Raison'))
+    .addStringOption(o =>
+      o.setName('duree')
+        .setDescription('Ex: 10m, 2h, 3j')
+        .setRequired(true)
+    )
+    .addStringOption(o =>
+      o.setName('raison')
+        .setDescription('Raison')
+        .setRequired(false)
+    )
     .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers),
 
   name: 'mute',
-  usage: 'cc mute @utilisateur 10m [raison]',
+  usage: 'mute @user 10m [raison]',
 
   async execute(ctx) {
+    const memberPerms = ctx.source?.member?.permissions;
 
-    if (!ctx.source?.member?.permissions?.has(PermissionFlagsBits.ModerateMembers)) {
-      const confirmation = await ctx.reply(
-        "❌ Tu n'as pas les permissions nécessaires."
-      );
-
-      setTimeout(() => {
-        confirmation.delete().catch(() => {});
-      }, 4000);
-
+    if (!memberPerms?.has(PermissionFlagsBits.ModerateMembers)) {
+      const msg = await ctx.reply("❌ Permissions insuffisantes.");
+      setTimeout(() => msg.delete().catch(() => {}), 4000);
       return;
     }
 
-    const cible    = ctx.isSlash ? ctx.source.options.getUser('cible')    : ctx.source.mentions.users.first();
-    const dureeKey = ctx.isSlash ? ctx.source.options.getString('duree')  : ctx.args[1];
-    const raison   = ctx.isSlash ? ctx.source.options.getString('raison') : ctx.args.slice(2).join(' ') || 'Aucune raison';
+    const cible = ctx.isSlash
+      ? ctx.source.options.getUser('cible')
+      : ctx.source.mentions.users.first();
 
-    if (!cible) return ctx.reply('❌ Mentionne un utilisateur.');
+    const dureeStr = ctx.isSlash
+      ? ctx.source.options.getString('duree')
+      : ctx.args?.[1];
 
-    const ms = DUREES[dureeKey];
-    if (!ms) return ctx.reply(`❌ Durée invalide. Options : ${Object.keys(DUREES).join(', ')}`);
+    const raison = ctx.isSlash
+      ? ctx.source.options.getString('raison') || 'Aucune raison'
+      : ctx.args.slice(2).join(' ') || 'Aucune raison';
 
-    const member = ctx.guild.members.cache.get(cible.id);
-    if (!member) return ctx.reply('❌ Membre introuvable.');
+    if (!cible) return ctx.reply("❌ Utilisateur introuvable.");
+
+    const ms = parseDuree(dureeStr);
+    if (!ms) {
+      return ctx.reply("❌ Durée invalide. Format attendu : 10m, 2h, 3j, 30s");
+    }
+
+    const member = await ctx.guild.members.fetch(cible.id).catch(() => null);
+    if (!member) return ctx.reply("❌ Membre introuvable.");
+
+    const maxTimeout = 28 * 24 * 60 * 60 * 1000;
+    if (ms > maxTimeout) {
+      return ctx.reply("❌ La durée dépasse la limite (28 jours).");
+    }
 
     await member.timeout(ms, raison);
-    await ctx.reply(`🔇 **${cible.tag}** est mute pendant **${dureeKey}**.\n📝 Raison : ${raison}`);
+
+    const dureeAffichee = dureeStr;
+
+    return ctx.reply(
+      `🔇 ${cible.tag} mute pendant **${dureeAffichee}**\n📝 Raison : ${raison}`
+    );
   },
 };

@@ -1,9 +1,8 @@
 const { Client, GatewayIntentBits, Collection, MessageFlags, EmbedBuilder, Partials } = require('discord.js');
 const { buildCtx } = require('./utils/ctx');
+const { getConfig } = require('./systems/config')
 const fs = require('fs');
 require('dotenv').config();
-
-const PREFIX = 'cc ';
 
 // Empêcher les erreurs EPIPE de crash le process
 process.on('uncaughtException', err => {
@@ -52,8 +51,8 @@ for (const file of eventFiles) {
 console.log(`[Events] ${eventFiles.length} event(s) chargé(s)`);
 
 // ─── Helper : envoyer un log de commande ─────────────────────────
-async function logCommande({ auteurId, salonId, contenu }) {
-  const logsChannel = client.channels.cache.get(process.env.LOGS_CHANNEL_ID);
+async function logCommande({ auteurId, salonId, contenu, logsChannel }) {
+
   if (!logsChannel) return; // pas de salon configuré → on ignore silencieusement
 
   const embed = new EmbedBuilder()
@@ -73,8 +72,6 @@ async function logCommande({ auteurId, salonId, contenu }) {
 client.on('interactionCreate', async interaction => {
   if (!interaction.isChatInputCommand()) return;
 
-  const logsChannel = client.channels.cache.get(process.env.LOGS_CHANNEL_ID);
-
   // Ignorer les interactions trop vieilles
   const age = Date.now() - interaction.createdTimestamp;
   if (age > 2500) {
@@ -85,12 +82,18 @@ client.on('interactionCreate', async interaction => {
   const command = client.commands.get(interaction.commandName);
   if (!command) return;
 
-  // Log de la commande slash
-  await logCommande({
-    auteurId: interaction.user.id,
-    salonId:  interaction.channel.id,
-    contenu:  `/${interaction.commandName}`,
-  });
+  const config = interaction.guild ? getConfig(interaction.guild.id) : { prefix: 'cc ' };
+
+  if (config.logs_channel) {
+    const logsChannel = interaction.guild.channels.cache.get(config.logs_channel);
+    // Log de la commande slash
+    await logCommande({
+      auteurId: interaction.user.id,
+      salonId:  interaction.channel.id,
+      contenu:  `/${interaction.commandName}`,
+      logsChannel: logsChannel,
+    });
+  }
 
   try {
     const ctx = buildCtx(interaction);
@@ -113,7 +116,12 @@ client.on('interactionCreate', async interaction => {
 // ─── PREFIX COMMANDS ─────────────────────────────────────────────
 client.on('messageCreate', async message => {
   if (message.author.bot) return;
-  if (!message.content.toLowerCase().startsWith(PREFIX)) return;
+
+  // ← Récupérer le prefix depuis la config du serveur
+  const config = message.guild ? getConfig(message.guild.id) : { prefix: 'cc ' };
+  const PREFIX = config.prefix;
+
+  if (!message.content.toLowerCase().startsWith(PREFIX.toLowerCase())) return;
 
   const args        = message.content.slice(PREFIX.length).trim().split(/\s+/);
   const commandName = args.shift().toLowerCase();
@@ -121,22 +129,26 @@ client.on('messageCreate', async message => {
   const command = client.commands.get(commandName);
   if (!command) return;
 
+  if (config.logs_channel) {
+    const logsChannel = message.guild.channels.cache.get(config.logs_channel);
+
   // Log de la commande prefix
-  await logCommande({
-    auteurId: message.author.id,
-    salonId:  message.channel.id,
-    contenu:  message.content.slice(0, 1024),
-  });
+    await logCommande({
+      auteurId: message.author.id,
+      salonId:  message.channel.id,
+      contenu:  message.content.slice(0, 1024),
+      logsChannel: logsChannel,
+    })
+  }
 
   try {
-    const ctx = buildCtx(message, args);
-    await command.execute(ctx);
-  } catch (err) {
-    console.error(`[Erreur commande cc ${commandName}]`, err);
-    message.reply('❌ Une erreur est survenue.').catch(() => {});
-  }
-});
-
+        const ctx = buildCtx(message, args);
+        await command.execute(ctx);
+    } catch (err) {
+        console.error(`[Erreur commande cc ${commandName}]`, err);
+        message.reply('❌ Une erreur est survenue.').catch(() => {});
+    }
+})
 // ─── Prêt ────────────────────────────────────────────────────────
 client.once('clientReady', () => {
   console.log(`✅ ${client.user.tag} est en ligne`);

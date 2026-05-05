@@ -1,4 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
+const { getConfig } = require('../systems/config');
 
 module.exports = {
   name: 'messageUpdate',
@@ -6,8 +7,8 @@ module.exports = {
   async execute(oldMessage, newMessage, client) {
     if (oldMessage.author?.bot) return;
     if (oldMessage.content === newMessage.content) return;
-
-    const logsChannel = oldMessage.guild?.channels.cache.get(process.env.LOGS_CHANNEL_ID);
+    const config      = getConfig(oldMessage.guild?.id);
+    const logsChannel = oldMessage.guild?.channels.cache.get(config.logs_channel);
     if (!logsChannel) return;
 
     const embed = new EmbedBuilder()

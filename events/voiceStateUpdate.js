@@ -1,7 +1,7 @@
 const { ChannelType } = require('discord.js');
-
+const { getConfig } = require('../systems/config');
 const tempChannels = new Map();
-const HUB_CHANNEL_ID = process.env.HUB_CHANNEL_ID;
+
 
 module.exports = {
   name: 'voiceStateUpdate',
@@ -9,6 +9,11 @@ module.exports = {
   async execute(oldState, newState) {
     const member = newState.member ?? oldState.member;
     const guild  = newState.guild  ?? oldState.guild;
+    const config = getConfig(guild.id);
+
+    // ← Utiliser le hub depuis la config au lieu de .env
+    const HUB_CHANNEL_ID = config.hub_channel;
+    if (!HUB_CHANNEL_ID) return;
 
     // ── Rejoint le hub → créer un salon ──────────────────────────
     if (newState.channelId === HUB_CHANNEL_ID) {

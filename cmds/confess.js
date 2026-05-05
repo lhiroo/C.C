@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { getConfig } = require('../systems/config');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -17,12 +18,13 @@ module.exports = {
 
     if (!texte) return ctx.editReply('❌ Écris quelque chose.');
 
-    const salon = ctx.guild.channels.cache.find(
-      c => c.name.toLowerCase().includes('confession') && c.isTextBased()
-    );
+    const config = getConfig(ctx.guild.id);
+    const salon  = config.confession_channel
+      ? ctx.guild.channels.cache.get(config.confession_channel)
+      : ctx.guild.channels.cache.find(c => c.name.toLowerCase().includes('confession') && c.isTextBased());
 
     if (!salon) {
-      return ctx.editReply('❌ Aucun salon "confessions" trouvé sur ce serveur.');
+      return ctx.editReply('❌ Aucun salon de confessions configuré. Utilise `/config salon` pour en définir un.');
     }
 
     const embed = new EmbedBuilder()

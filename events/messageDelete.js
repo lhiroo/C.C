@@ -1,4 +1,5 @@
 const { EmbedBuilder, AuditLogEvent } = require('discord.js');
+const { getConfig } = require('../systems/config');
 
 module.exports = {
   name: 'messageDelete',
@@ -7,7 +8,8 @@ module.exports = {
     if (message.author?.bot) return;
     if (!message.content) return;
 
-    const logsChannel = message.guild?.channels.cache.get(process.env.LOGS_CHANNEL_ID);
+    const config      = getConfig(message.guild?.id);
+    const logsChannel = message.guild?.channels.cache.get(config.logs_channel);
     if (!logsChannel) return;
 
     const embed = new EmbedBuilder()
