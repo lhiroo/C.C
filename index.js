@@ -86,7 +86,7 @@ client.on('interactionCreate', async interaction => {
 
   if (config.logs_channel) {
     const logsChannel = interaction.guild.channels.cache.get(config.logs_channel);
-    // Log de la commande slash
+
     await logCommande({
       auteurId: interaction.user.id,
       salonId:  interaction.channel.id,

@@ -16,7 +16,7 @@ for (const file of commandFiles) {
   console.log(`Déploiement de ${commands.length} commande(s)...`);
 
   await rest.put(
-    Routes.applicationCommands(process.env.CLIENT_ID), // ← global, tous les serveurs
+    Routes.applicationCommands(process.env.CLIENT_ID),
     { body: commands }
   );
 
