@@ -1,6 +1,7 @@
 const { Client, GatewayIntentBits, Collection, MessageFlags, EmbedBuilder, Partials } = require('discord.js');
 const { buildCtx } = require('./utils/ctx');
 const { getConfig } = require('./systems/config')
+const { seedCharacters, cleanExpiredRolls } = require('./systems/gacha/roller');
 const fs = require('fs');
 require('dotenv').config();
 
@@ -70,9 +71,76 @@ async function logCommande({ auteurId, salonId, contenu, logsChannel }) {
 
 // ─── SLASH COMMANDS ──────────────────────────────────────────────
 client.on('interactionCreate', async interaction => {
-  if (!interaction.isChatInputCommand()) return;
 
-  // Ignorer les interactions trop vieilles
+  // BOUTONS
+  if (interaction.isButton()) {
+
+      // --------------- Bouton claim gacha ---------------------
+  if (interaction.customId.startsWith('claim_')) {
+  try {
+    const rollId = parseInt(interaction.customId.replace('claim_', ''));
+
+    const { claim } = require('./systems/gacha/roller');
+    const { EmbedBuilder } = require('discord.js');
+
+    const result = claim(
+      rollId,
+      interaction.user.id,
+      interaction.guild.id,
+      interaction.user.username
+    );
+
+    if (!result.ok) {
+      return interaction.reply({
+        content: `❌ ${result.reason}`,
+        flags: 64
+      });
+    }
+
+    const { character, rarity } = result;
+
+    const embed = new EmbedBuilder()
+      .setTitle(`✅ ${character.name} ajouté à ta collection !`)
+      .setDescription(`**${character.anime}** • ${rarity.emoji} ${rarity.label}`)
+      .setThumbnail(character.image_url)
+      .setColor(rarity.color);
+
+    return interaction.reply({
+      embeds: [embed],
+      flags: 64
+    });
+
+  } catch (err) {
+    console.error(err);
+
+    if (!interaction.replied) {
+      interaction.reply({
+        content: '❌ Une erreur est survenue.',
+        flags: 64
+      }).catch(() => {});
+    }
+  }
+}
+
+  if (interaction.customId.startsWith('characters_')) {
+    try {
+
+      const characters = require('./cmds/characterlist');
+        return characters.handleButton(interaction);
+
+    } catch (err) {
+      console.error(err);
+
+      if (!interaction.replied) {
+        interaction.reply({
+          content: '❌ Erreur.',
+          flags: 64
+        }).catch(() => {});
+      }
+    }
+  }
+}
+// ------------ Ignorer les interactions trop vieilles ------------------
   const age = Date.now() - interaction.createdTimestamp;
   if (age > 2500) {
     console.warn(`[Interaction ignorée] /${interaction.commandName} trop vieille (${age}ms)`);
@@ -149,10 +217,17 @@ client.on('messageCreate', async message => {
         message.reply('❌ Une erreur est survenue.').catch(() => {});
     }
 })
+
 // ─── Prêt ────────────────────────────────────────────────────────
 client.once('clientReady', () => {
   console.log(`✅ ${client.user.tag} est en ligne`);
   console.log(`📡 Connecté sur ${client.guilds.cache.size} serveur(s)`);
+
+  // Seed les personnages en BDD
+  seedCharacters();
+
+  // Nettoyer les rolls expirés toutes les 5 minutes
+  setInterval(cleanExpiredRolls, 5 * 60 * 1000);
 });
 
 client.login(process.env.TOKEN);

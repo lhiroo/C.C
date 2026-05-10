@@ -24,7 +24,7 @@ const CATEGORIES = {
   utilitaire: {
     emoji: '🔧',
     label: 'Utilitaire',
-    cmds: ['ping', 'pp', 'userinfo', 'poll', 'remind', 'giveaway', 'confess'],
+    cmds: ['config', 'ping', 'pp', 'userinfo', 'poll', 'remind', 'giveaway', 'confess'],
   },
 };
 

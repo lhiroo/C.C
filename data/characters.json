@@ -1,0 +1,326 @@
+[
+  {
+    "name": "Reigen Arataka",
+    "anime": "Mob Psycho 100",
+    "image_url": "https://i.pinimg.com/736x/reigen.jpg",
+    "rarity": "common",
+    "power": 1200,
+    "health": 1500,
+    "speed": 2000,
+    "description": "Maître en bluff spirituel."
+  },
+  {
+    "name": "Konohamaru Sarutobi",
+    "anime": "Naruto",
+    "image_url": "https://i.pinimg.com/736x/konohamaru.jpg",
+    "rarity": "common",
+    "power": 2200,
+    "health": 2100,
+    "speed": 2400,
+    "description": "Élève prometteur de Konoha."
+  },
+  {
+    "name": "Udon",
+    "anime": "Naruto",
+    "image_url": "https://i.pinimg.com/736x/udon.jpg",
+    "rarity": "common",
+    "power": 1800,
+    "health": 2000,
+    "speed": 1700,
+    "description": "Ninja discret de l’équipe Konohamaru."
+  },
+  {
+    "name": "Moegi",
+    "anime": "Naruto",
+    "image_url": "https://i.pinimg.com/736x/moegi.jpg",
+    "rarity": "common",
+    "power": 1900,
+    "health": 1800,
+    "speed": 2100,
+    "description": "Nouvelle génération de Konoha."
+  },
+  {
+    "name": "Chopper",
+    "anime": "One Piece",
+    "image_url": "https://i.pinimg.com/736x/chopper.jpg",
+    "rarity": "common",
+    "power": 2000,
+    "health": 2500,
+    "speed": 2200,
+    "description": "Médecin de l’équipage du Chapeau de paille."
+  },
+  {
+    "name": "Krillin",
+    "anime": "Dragon Ball Z",
+    "image_url": "https://i.pinimg.com/736x/krillin.jpg",
+    "rarity": "common",
+    "power": 2600,
+    "health": 2400,
+    "speed": 2800,
+    "description": "Le terrien courageux."
+  },
+
+  {
+    "name": "Zenitsu Agatsuma",
+    "anime": "Demon Slayer",
+    "image_url": "https://i.pinimg.com/736x/zenitsu.jpg",
+    "rarity": "rare",
+    "power": 5200,
+    "health": 4500,
+    "speed": 7500,
+    "description": "La foudre endormie."
+  },
+  {
+    "name": "Inosuke Hashibira",
+    "anime": "Demon Slayer",
+    "image_url": "https://i.pinimg.com/736x/inosuke.jpg",
+    "rarity": "rare",
+    "power": 5400,
+    "health": 5000,
+    "speed": 6200,
+    "description": "Guerrier sauvage."
+  },
+  {
+    "name": "Asuna Yuuki",
+    "anime": "Sword Art Online",
+    "image_url": "https://i.pinimg.com/736x/asuna.jpg",
+    "rarity": "rare",
+    "power": 5400,
+    "health": 4700,
+    "speed": 7200,
+    "description": "L’éclair fulgurant."
+  },
+  {
+    "name": "Rukia Kuchiki",
+    "anime": "Bleach",
+    "image_url": "https://i.pinimg.com/736x/rukia.jpg",
+    "rarity": "rare",
+    "power": 5900,
+    "health": 5200,
+    "speed": 6100,
+    "description": "Shinigami déterminée."
+  },
+  {
+    "name": "Megumin",
+    "anime": "Konosuba",
+    "image_url": "https://i.pinimg.com/736x/megumin.jpg",
+    "rarity": "rare",
+    "power": 7500,
+    "health": 3200,
+    "speed": 3000,
+    "description": "EXPLOSION !"
+  },
+  {
+    "name": "Shinra Kusakabe",
+    "anime": "Fire Force",
+    "image_url": "https://i.pinimg.com/736x/shinra.jpg",
+    "rarity": "rare",
+    "power": 6000,
+    "health": 5200,
+    "speed": 7800,
+    "description": "Le démon des flammes."
+  },
+  {
+    "name": "Arthur Boyle",
+    "anime": "Fire Force",
+    "image_url": "https://i.pinimg.com/736x/arthur.jpg",
+    "rarity": "rare",
+    "power": 5800,
+    "health": 5400,
+    "speed": 6200,
+    "description": "Chevalier du plasma."
+  },
+  {
+    "name": "Mikasa Ackerman",
+    "anime": "Attack on Titan",
+    "image_url": "https://i.pinimg.com/736x/mikasa.jpg",
+    "rarity": "rare",
+    "power": 6100,
+    "health": 5800,
+    "speed": 7600,
+    "description": "Guerrière d’élite."
+  },
+
+  {
+    "name": "Naruto Uzumaki",
+    "anime": "Naruto",
+    "image_url": "https://wallpaper.forfun.com/fetch/37/370788ef097f85e56a72dc4ebb65f5e7.jpeg",
+    "rarity": "epic",
+    "power": 6200,
+    "health": 5800,
+    "speed": 5500,
+    "description": "Le futur Hokage."
+  },
+  {
+    "name": "Tanjiro Kamado",
+    "anime": "Demon Slayer",
+    "image_url": "https://i.pinimg.com/736x/tanjiro.jpg",
+    "rarity": "epic",
+    "power": 6400,
+    "health": 6100,
+    "speed": 5900,
+    "description": "Pourfendeur de démons."
+  },
+  {
+    "name": "Eren Yeager",
+    "anime": "Attack on Titan",
+    "image_url": "https://i.pinimg.com/736x/eren.jpg",
+    "rarity": "epic",
+    "power": 6500,
+    "health": 5000,
+    "speed": 5200,
+    "description": "Rage de la liberté."
+  },
+  {
+    "name": "Shoto Todoroki",
+    "anime": "My Hero Academia",
+    "image_url": "https://i.pinimg.com/736x/todoroki.jpg",
+    "rarity": "epic",
+    "power": 7000,
+    "health": 6500,
+    "speed": 6100,
+    "description": "Glace et feu."
+  },
+  {
+    "name": "Killua Zoldyck",
+    "anime": "Hunter x Hunter",
+    "image_url": "https://i.pinimg.com/736x/killua.jpg",
+    "rarity": "epic",
+    "power": 6800,
+    "health": 5700,
+    "speed": 9200,
+    "description": "Assassin prodige."
+  },
+  {
+    "name": "Gon Freecss",
+    "anime": "Hunter x Hunter",
+    "image_url": "https://i.pinimg.com/736x/gon.jpg",
+    "rarity": "epic",
+    "power": 6700,
+    "health": 6400,
+    "speed": 7000,
+    "description": "Chasseur déterminé."
+  },
+  {
+    "name": "Mob",
+    "anime": "Mob Psycho 100",
+    "image_url": "https://i.pinimg.com/736x/mob.jpg",
+    "rarity": "epic",
+    "power": 6900,
+    "health": 7000,
+    "speed": 6500,
+    "description": "Pouvoir psychique instable."
+  },
+  {
+    "name": "Genos",
+    "anime": "One Punch Man",
+    "image_url": "https://i.pinimg.com/736x/genos.jpg",
+    "rarity": "epic",
+    "power": 7100,
+    "health": 6500,
+    "speed": 8200,
+    "description": "Cyborg destructeur."
+  },
+
+  {
+    "name": "Goku",
+    "anime": "Dragon Ball Z",
+    "image_url": "https://i.pinimg.com/736x/goku.jpg",
+    "rarity": "legendary",
+    "power": 8500,
+    "health": 8000,
+    "speed": 7800,
+    "description": "Saiyan légendaire."
+  },
+  {
+    "name": "Vegeta",
+    "anime": "Dragon Ball Z",
+    "image_url": "https://i.pinimg.com/736x/vegeta.jpg",
+    "rarity": "legendary",
+    "power": 8700,
+    "health": 8200,
+    "speed": 7900,
+    "description": "Prince des Saiyans."
+  },
+  {
+    "name": "Luffy",
+    "anime": "One Piece",
+    "image_url": "https://i.pinimg.com/736x/luffy.jpg",
+    "rarity": "legendary",
+    "power": 8700,
+    "health": 8900,
+    "speed": 7600,
+    "description": "Roi des pirates."
+  },
+  {
+    "name": "Itachi Uchiha",
+    "anime": "Naruto",
+    "image_url": "https://i.pinimg.com/736x/itachi.jpg",
+    "rarity": "legendary",
+    "power": 9000,
+    "health": 7600,
+    "speed": 8200,
+    "description": "Génie Uchiha."
+  },
+
+  {
+    "name": "Gojo Satoru",
+    "anime": "Jujutsu Kaisen",
+    "image_url": "https://i.pinimg.com/736x/gojo.jpg",
+    "rarity": "mythic",
+    "power": 9800,
+    "health": 9300,
+    "speed": 9500,
+    "description": "Les Six Yeux."
+  },
+  {
+    "name": "Sukuna",
+    "anime": "Jujutsu Kaisen",
+    "image_url": "https://i.pinimg.com/736x/sukuna.jpg",
+    "rarity": "mythic",
+    "power": 9900,
+    "health": 9500,
+    "speed": 9200,
+    "description": "Roi des fléaux."
+  },
+  {
+    "name": "Madara Uchiha",
+    "anime": "Naruto",
+    "image_url": "https://i.pinimg.com/736x/madara.jpg",
+    "rarity": "mythic",
+    "power": 9700,
+    "health": 9400,
+    "speed": 8700,
+    "description": "Terreur Uchiha."
+  },
+  {
+    "name": "Aizen Sosuke",
+    "anime": "Bleach",
+    "image_url": "https://i.pinimg.com/736x/aizen.jpg",
+    "rarity": "mythic",
+    "power": 9600,
+    "health": 9100,
+    "speed": 8900,
+    "description": "Illusion parfaite."
+  },
+  {
+    "name": "Saitama",
+    "anime": "One Punch Man",
+    "image_url": "https://avatarfiles.alphacoders.com/336/thumb-1920-336672.png",
+    "rarity": "mythic",
+    "power": 9999,
+    "health": 9999,
+    "speed": 9999,
+    "description": "Un coup suffit."
+  },
+  {
+    "name": "Alucard",
+    "anime": "Hellsing",
+    "image_url": "https://i.pinimg.com/736x/alucard.jpg",
+    "rarity": "mythic",
+    "power": 9900,
+    "health": 9800,
+    "speed": 9000,
+    "description": "Vampire absolu."
+  }
+]
