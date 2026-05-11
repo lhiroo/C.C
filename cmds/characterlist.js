@@ -89,7 +89,7 @@ async function sendPage(interaction, page, edit = false) {
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('characters')
+    .setName('character-list')
     .setDescription('Affiche la liste des personnages'),
 
   name: 'characterlist',

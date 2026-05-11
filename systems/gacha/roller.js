@@ -8,24 +8,79 @@ const ROLL_WINDOW_MS  = 60 * 60 * 1000; // 1 heure
 const CLAIM_CD_MS     = 3 * 60 * 60 * 1000; // 3 heures
 const ROLL_EXPIRES_MS = 60 * 1000;  // le roll expire après 60s
 
+function migrateCharactersTable() {
+  const tableInfo = db.prepare(`SELECT sql FROM sqlite_master WHERE type='table' AND name='characters'`).get();
+  if (!tableInfo || tableInfo.sql.toUpperCase().includes('UNIQUE')) return;
+
+  console.log('[Gacha] Migration de la table characters (ajout UNIQUE sur name)...');
+
+  // Désactiver les FK le temps de la migration
+  db.pragma('foreign_keys = OFF');
+
+  try {
+    db.exec(`
+      ALTER TABLE characters RENAME TO characters_old;
+
+      CREATE TABLE characters (
+        id          INTEGER PRIMARY KEY AUTOINCREMENT,
+        name        TEXT NOT NULL UNIQUE,
+        anime       TEXT NOT NULL,
+        image_url   TEXT NOT NULL,
+        rarity      TEXT NOT NULL,
+        power       INTEGER NOT NULL,
+        health      INTEGER NOT NULL,
+        speed       INTEGER NOT NULL,
+        description TEXT
+      );
+
+      INSERT INTO characters SELECT * FROM characters_old;
+      DROP TABLE characters_old;
+    `);
+
+    console.log('[Gacha] Migration terminée.');
+  } catch (err) {
+    console.error('[Gacha] Échec de la migration :', err);
+    // Rollback manuel si la nouvelle table a été créée à moitié
+    db.exec(`
+      DROP TABLE IF EXISTS characters;
+      ALTER TABLE characters_old RENAME TO characters;
+    `);
+    throw err;
+  } finally {
+    // Toujours réactiver les FK, même en cas d'erreur
+    db.pragma('foreign_keys = ON');
+  }
+}
+
 // Charger et seed les personnages en BDD au démarrage
 function seedCharacters() {
-  const count = db.prepare('SELECT COUNT(*) as n FROM characters').get().n;
-  if (count > 0) return;
-
-  const chars    = JSON.parse(
+  const chars = JSON.parse(
     fs.readFileSync(path.join(process.cwd(), 'data', 'characters.json'), 'utf-8')
   );
-  const insert = db.prepare(`
+
+  // UPSERT : insert ou update les stats du perso, sans toucher aux données joueurs
+  const upsert = db.prepare(`
     INSERT INTO characters (name, anime, image_url, rarity, power, health, speed, description)
     VALUES (@name, @anime, @image_url, @rarity, @power, @health, @speed, @description)
+    ON CONFLICT(name) DO UPDATE SET
+      anime       = excluded.anime,
+      image_url   = excluded.image_url,
+      rarity      = excluded.rarity,
+      power       = excluded.power,
+      health      = excluded.health,
+      speed       = excluded.speed,
+      description = excluded.description
   `);
 
-  const insertMany = db.transaction(chars => {
-    for (const c of chars) insert.run(c);
+  const sync = db.transaction((chars) => {
+    for (const c of chars) {
+      upsert.run(c);
+    }
   });
-  insertMany(chars);
-  console.log(`[Gacha] ${chars.length} personnages chargés en BDD`);
+
+  sync(chars);
+
+  console.log(`[Gacha] ${chars.length} personnages synchronisés en BDD`);
 }
 
 // Récupérer ou créer un utilisateur gacha
@@ -186,4 +241,4 @@ function cleanExpiredRolls() {
   if (deleted > 0) console.log(`[Gacha] ${deleted} roll(s) expiré(s) supprimé(s)`);
 }
 
-module.exports = { seedCharacters, roll, claim, getOrCreateUser, checkRollCooldown, checkClaimCooldown, cleanExpiredRolls, ROLL_LIMIT };
+module.exports = { migrateCharactersTable, seedCharacters, roll, claim, getOrCreateUser, checkRollCooldown, checkClaimCooldown, cleanExpiredRolls, ROLL_LIMIT };

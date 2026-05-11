@@ -1,7 +1,7 @@
 const { Client, GatewayIntentBits, Collection, MessageFlags, EmbedBuilder, Partials } = require('discord.js');
 const { buildCtx } = require('./utils/ctx');
 const { getConfig } = require('./systems/config')
-const { seedCharacters, cleanExpiredRolls } = require('./systems/gacha/roller');
+const { migrateCharactersTable, seedCharacters, cleanExpiredRolls } = require('./systems/gacha/roller');
 const fs = require('fs');
 require('dotenv').config();
 
@@ -224,6 +224,7 @@ client.once('clientReady', () => {
   console.log(`📡 Connecté sur ${client.guilds.cache.size} serveur(s)`);
 
   // Seed les personnages en BDD
+  migrateCharactersTable()
   seedCharacters();
 
   // Nettoyer les rolls expirés toutes les 5 minutes

@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS gacha_users (
 
 CREATE TABLE IF NOT EXISTS characters (
   id          INTEGER PRIMARY KEY AUTOINCREMENT,
-  name        TEXT NOT NULL,
+  name        TEXT NOT NULL UNIQUE,
   anime       TEXT NOT NULL,
   image_url   TEXT NOT NULL,
   rarity      TEXT NOT NULL,

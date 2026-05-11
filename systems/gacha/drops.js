@@ -1,10 +1,10 @@
 const RARITIES = {
-  common:    { label: 'Common',    emoji: '⚪', color: 0x95a5a6, weight: 6000, powerRange: [500,   1499]  },
-  uncommon:  { label: 'Uncommon',  emoji: '🟢', color: 0x2ecc71, weight: 2500, powerRange: [1500,  2999]  },
-  rare:      { label: 'Rare',      emoji: '🔵', color: 0x3498db, weight: 1200, powerRange: [3000,  4999]  },
-  epic:      { label: 'Epic',      emoji: '🟣', color: 0x9b59b6, weight: 250,  powerRange: [5000,  6999]  },
-  legendary: { label: 'Legendary', emoji: '🟡', color: 0xf39c12, weight: 45,  powerRange: [7000,  8999]  },
-  mythic:    { label: 'Mythic',    emoji: '🔴', color: 0xe74c3c, weight: 5,   powerRange: [9000,  10000] },
+  common:    { label: 'Common',    emoji: '⚪', color: 0x95a5a6, weight: 7000, powerRange: [500,   1499]  },
+  uncommon:  { label: 'Uncommon',  emoji: '🟢', color: 0x2ecc71, weight: 2200, powerRange: [1500,  2999]  },
+  rare:      { label: 'Rare',      emoji: '🔵', color: 0x3498db, weight: 700, powerRange: [3000,  4999]  },
+  epic:      { label: 'Epic',      emoji: '🟣', color: 0x9b59b6, weight: 90,  powerRange: [5000,  6999]  },
+  legendary: { label: 'Legendary', emoji: '🟡', color: 0xf39c12, weight: 9,  powerRange: [7000,  8999]  },
+  mythic:    { label: 'Mythic',    emoji: '🔴', color: 0xe74c3c, weight: 1,   powerRange: [9000,  10000] },
 };
 
 const TOTAL_WEIGHT = Object.values(RARITIES).reduce((sum, r) => sum + r.weight, 0);

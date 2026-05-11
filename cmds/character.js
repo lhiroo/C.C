@@ -100,11 +100,11 @@ module.exports = {
           value: `${character.speed}`,
           inline: true
         },*/
-        {
+        /*{
           name: '🆔 ID',
           value: `${character.id}`,
           inline: true
-        }
+        }*/
       )
       .setFooter({
         text: `Demandé par ${ctx.user.username}`
