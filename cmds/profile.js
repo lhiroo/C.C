@@ -14,7 +14,7 @@ module.exports = {
   async execute(ctx) {
     await ctx.defer();
 
-    const cible   = ctx.isSlash ? (ctx.source.options.getUser('joueur') ?? ctx.user) : ctx.user;
+    const cible   = ctx.isSlash ? (ctx.source.options.getUser('joueur') ?? ctx.user) : (ctx.source.mentions.users.first() ?? ctx.user);
     const profile = getProfile(cible.id, ctx.guild.id);
 
     if (!profile) return ctx.editReply('❌ Ce joueur n\'a pas encore joué.');

@@ -21,8 +21,8 @@ module.exports = {
   async execute(ctx) {
     await ctx.defer();
 
-    const cible  = ctx.isSlash ? (ctx.source.options.getUser('joueur') ?? ctx.user) : ctx.user;
-    const page   = ctx.isSlash ? (ctx.source.options.getInteger('page') ?? 1) : 1;
+    const cible  = ctx.isSlash ? (ctx.source.options.getUser('joueur') ?? ctx.user) : (ctx.source.mentions.users.first() ?? ctx.user);
+    const page   = ctx.isSlash ? (ctx.source.options.getInteger('page') ?? 1) : parseInt(ctx.args[0]);
     const rarity = ctx.isSlash ? ctx.source.options.getString('rarity') : null;
 
     const { cards, total, totalPages } = getCollection(cible.id, ctx.guild.id, page, rarity);
