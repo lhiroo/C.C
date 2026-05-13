@@ -58,9 +58,46 @@ async function loadCharacterCache() {
 }
 
 function findCharacter(search) {
-  const q = search.toLowerCase();
+  const q = search.toLowerCase().trim();
+
   const all = Object.values(_characterCache ?? {}).flat();
-  return all.find(c => c.name.toLowerCase().includes(q)) ?? null;
+
+  // 1. MATCH EXACT (priorité absolue)
+  const exact = all.find(c =>
+    c.name.toLowerCase() === q
+  );
+  if (exact) return exact;
+
+  // 2. MATCH "mot entier" (évite Goku vs Goku Black partiel)
+  const wordMatch = all.find(c => {
+    const name = c.name.toLowerCase();
+    return name.split(' ').includes(q);
+  });
+  if (wordMatch) return wordMatch;
+
+  // 3. MATCH CONTIENT MAIS SCORE (évite mauvais premier résultat)
+  let best = null;
+  let bestScore = 0;
+
+  for (const c of all) {
+    const name = c.name.toLowerCase();
+
+    let score = 0;
+
+    if (name.startsWith(q)) score += 3;
+    if (name.includes(` ${q} `)) score += 5;
+    if (name.includes(q)) score += 1;
+
+    // bonus si même longueur proche
+    score -= Math.abs(name.length - q.length) * 0.01;
+
+    if (score > bestScore) {
+      bestScore = score;
+      best = c;
+    }
+  }
+
+  return best;
 }
 
 function getAllCharacters() {

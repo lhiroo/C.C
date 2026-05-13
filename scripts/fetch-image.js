@@ -1,4 +1,5 @@
 const db   = require('../db/database');
+const { get, all, run, batch } = require('../db/query')
 const fs   = require('fs');
 const path = require('path');
 const https = require('https');
