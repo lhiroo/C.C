@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require('discord.js');
 const { get, run } = require('../db/query');
+require('dotenv').config();
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -28,20 +29,16 @@ module.exports = {
   async execute(ctx) {
     await ctx.defer();
 
+    if (ctx.user.id !== process.env.OWNER_ID) {
+      return ctx.editReply('❌ Tu ne peux pas utiliser cette commande.');
+    }
+
     // Vérif permissions pour cibler quelqu'un d'autre
     const type   = ctx.isSlash ? ctx.source.options.getString('type')        : ctx.args[0];
-    const target = ctx.isSlash ? ctx.source.options.getUser('utilisateur')   : null;
+    const targetUser = ctx.isSlash ? (ctx.source.options.getUser('utilisateur') ?? ctx.user)   : (ctx.source.mentions.users.first() ?? ctx.user);
 
     if (!['roll', 'claim', 'both'].includes(type)) {
       return ctx.editReply('❌ Type invalide. Utilise `roll`, `claim` ou `both`.');
-    }
-
-    const targetUser = target ?? ctx.user;
-
-    // Vérif : seul un admin peut reset quelqu'un d'autre
-    const isAdmin = ctx.member?.permissions?.has(PermissionFlagsBits.Administrator);
-    if (targetUser.id !== ctx.user.id && !isAdmin) {
-      return ctx.editReply('❌ Tu n\'as pas la permission de reset le cooldown d\'un autre utilisateur.');
     }
 
     const user = await get(

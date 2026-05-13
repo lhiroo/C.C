@@ -54,6 +54,6 @@ if (!Number.isFinite(rollId)) {
         const { character } = result;
 
         return ctx.reply(`${character.name} given to ${cible.username}`);*/
-        return
+        return;
     }
 }
