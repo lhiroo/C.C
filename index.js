@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, Collection, MessageFlags, EmbedBuilder, Partials } = require('discord.js');
+const { Client, GatewayIntentBits, Collection, MessageFlags, EmbedBuilder,ButtonBuilder, ButtonStyle, ActionRowBuilder, Partials } = require('discord.js');
 const { buildCtx } = require('./utils/ctx');
 const { getConfig } = require('./systems/config')
 const { seedCharacters, loadCharacterCache, claim, cleanExpiredRolls } = require('./systems/gacha/roller');
@@ -89,7 +89,21 @@ client.on('interactionCreate', async interaction => {
         content: `❌ ${result.reason ?? 'Une erreur est survenue.'}`,
         flags: 64
       });
-    }
+    } else {
+        const disabledButton = new ButtonBuilder()
+          .setCustomId('claimed')
+          .setLabel('Claimed')
+          .setStyle(ButtonStyle.Secondary)
+          .setDisabled(true);
+
+        const row = new ActionRowBuilder()
+          .addComponents(disabledButton);
+
+        // Modifie le message contenant le bouton
+        await interaction.message.edit({
+          components: [row]
+        });
+      }
 
     const { character, rarity } = result;
 
@@ -135,7 +149,7 @@ client.on('interactionCreate', async interaction => {
   }
 // ------------ Ignorer les interactions trop vieilles ------------------
   if (!interaction.isButton() && !interaction.isCommand()) return;
-  
+
   const age = Date.now() - interaction.createdTimestamp;
   if (age > 2500 && !interaction.isButton()) return
 
