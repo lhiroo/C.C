@@ -262,5 +262,5 @@ module.exports = {
   roll, claim,
   getOrCreateUser, checkRollCooldown, checkClaimCooldown,
   cleanExpiredRolls, ROLL_LIMIT,
-  findCharacter, getAllCharacters, // ← nouveau
+  findCharacter, getAllCharacters,
 };

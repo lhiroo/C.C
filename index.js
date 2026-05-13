@@ -72,10 +72,19 @@ async function logCommande({ auteurId, salonId, contenu, logsChannel }) {
 // ─── SLASH COMMANDS ──────────────────────────────────────────────
 client.on('interactionCreate', async interaction => {
 
+  // ------------ Ignorer les interactions trop vieilles ------------------
+  if (!interaction.isButton() && !interaction.isCommand()) return;
+
+  const age = Date.now() - interaction.createdTimestamp;
+  if (age > 2500 && !interaction.isButton()) return
+
   // BOUTONS
-  if (interaction.customId.startsWith('claim_')) {
+  if (interaction.isButton()) {
+
+    if (interaction.customId.startsWith('claim_')) {
   try {
     const rollId = parseInt(interaction.customId.replace('claim_', ''));
+    console.log(rollId);
 
     const result = await claim(   // <-- await obligatoire depuis migration Turso
       rollId,
@@ -147,11 +156,8 @@ client.on('interactionCreate', async interaction => {
       }
     }
   }
-// ------------ Ignorer les interactions trop vieilles ------------------
-  if (!interaction.isButton() && !interaction.isCommand()) return;
-
-  const age = Date.now() - interaction.createdTimestamp;
-  if (age > 2500 && !interaction.isButton()) return
+  return;
+  }
 
   const command = client.commands.get(interaction.commandName);
   if (!command) return;
