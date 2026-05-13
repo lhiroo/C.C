@@ -1,12 +1,13 @@
-const db             = require('../../db/database');
-const { RARITIES }   = require('../gacha/drops');
+const { get, all, run } = require('../../db/query');
+const { RARITIES }      = require('../gacha/drops');
 
 const PAGE_SIZE = 10;
 
-function getCollection(userId, guildId, page = 1, rarityFilter = null) {
-  const offset = (page - 1) * PAGE_SIZE;
+async function getCollection(userId, guildId, page = 1, rarityFilter = null) {
+  const safePage = (Number.isInteger(page) && page > 0) ? page : 1;
+  const offset   = (safePage - 1) * PAGE_SIZE;
 
-  let query = `
+  let sql    = `
     SELECT uc.id as card_id, uc.obtained_at, uc.is_favorite,
            c.name, c.anime, c.image_url, c.rarity, c.power, c.health, c.speed
     FROM user_cards uc
@@ -16,70 +17,76 @@ function getCollection(userId, guildId, page = 1, rarityFilter = null) {
   const params = [userId, guildId];
 
   if (rarityFilter) {
-    query += ' AND c.rarity = ?';
+    sql += ' AND c.rarity = ?';
     params.push(rarityFilter);
   }
 
-  query += ' ORDER BY uc.is_favorite DESC, c.rarity DESC, uc.obtained_at DESC LIMIT ? OFFSET ?';
+  sql += ' ORDER BY uc.is_favorite DESC, c.power DESC, uc.obtained_at DESC LIMIT ? OFFSET ?';
   params.push(PAGE_SIZE, offset);
 
-  const cards = db.prepare(query).all(...params);
+  const cards = await all(sql, ...params);
 
-  const countQuery = rarityFilter
+  const countSql = rarityFilter
     ? 'SELECT COUNT(*) as n FROM user_cards uc JOIN characters c ON c.id = uc.character_id WHERE uc.user_id = ? AND uc.guild_id = ? AND c.rarity = ?'
     : 'SELECT COUNT(*) as n FROM user_cards WHERE user_id = ? AND guild_id = ?';
 
   const countParams = rarityFilter ? [userId, guildId, rarityFilter] : [userId, guildId];
-  const total = db.prepare(countQuery).get(...countParams).n;
+  const countRow    = await get(countSql, ...countParams);
+  const total       = Number(countRow?.n ?? 0);
 
-  return { cards, total, page, totalPages: Math.ceil(total / PAGE_SIZE) };
+  return { cards, total, page: safePage, totalPages: Math.ceil(total / PAGE_SIZE) || 1 };
 }
 
-function getProfile(userId, guildId) {
-  const user = db.prepare('SELECT * FROM gacha_users WHERE id = ? AND guild_id = ?').get(userId, guildId);
+async function getProfile(userId, guildId) {
+  const user = await get(
+    'SELECT * FROM gacha_users WHERE id = ? AND guild_id = ?',
+    userId, guildId
+  );
   if (!user) return null;
 
-  const stats = db.prepare(`
+  const stats = await all(`
     SELECT c.rarity, COUNT(*) as count
     FROM user_cards uc
     JOIN characters c ON c.id = uc.character_id
     WHERE uc.user_id = ? AND uc.guild_id = ?
     GROUP BY c.rarity
-  `).all(userId, guildId);
+  `, userId, guildId);
 
-  const best = db.prepare(`
+  const best = await get(`
     SELECT c.* FROM user_cards uc
     JOIN characters c ON c.id = uc.character_id
     WHERE uc.user_id = ? AND uc.guild_id = ?
     ORDER BY c.power DESC LIMIT 1
-  `).get(userId, guildId);
+  `, userId, guildId);
 
-  const total = db.prepare(
-    'SELECT COUNT(*) as n FROM user_cards WHERE user_id = ? AND guild_id = ?'
-  ).get(userId, guildId).n;
+  const totalRow = await get(
+    'SELECT COUNT(*) as n FROM user_cards WHERE user_id = ? AND guild_id = ?',
+    userId, guildId
+  );
 
-  return { user, stats, best, total };
+  return { user, stats, best, total: Number(totalRow?.n ?? 0) };
 }
 
-function getCard(cardId, userId, guildId) {
-  return db.prepare(`
+async function getCard(cardId, userId, guildId) {
+  return get(`
     SELECT uc.id as card_id, uc.obtained_at, uc.is_favorite,
-           c.name, c.anime, c.image_url, c.rarity, c.power, c.health, c.speed, c.description
+           c.name, c.anime, c.image_url, c.rarity,
+           c.power, c.health, c.speed, c.description
     FROM user_cards uc
     JOIN characters c ON c.id = uc.character_id
     WHERE uc.id = ? AND uc.user_id = ? AND uc.guild_id = ?
-  `).get(cardId, userId, guildId);
+  `, cardId, userId, guildId);
 }
 
-function toggleFavorite(cardId, userId, guildId) {
-  const card = getCard(cardId, userId, guildId);
+async function toggleFavorite(cardId, userId, guildId) {
+  const card = await getCard(cardId, userId, guildId);
   if (!card) return false;
-  db.prepare('UPDATE user_cards SET is_favorite = NOT is_favorite WHERE id = ?').run(cardId);
+  await run('UPDATE user_cards SET is_favorite = NOT is_favorite WHERE id = ?', cardId);
   return true;
 }
 
-function getLeaderboard(guildId, limit = 10) {
-  return db.prepare(`
+async function getLeaderboard(guildId, limit = 10) {
+  return all(`
     SELECT gu.id, gu.username,
            COUNT(uc.id) as total_cards,
            gu.total_rolls, gu.total_claims,
@@ -91,7 +98,7 @@ function getLeaderboard(guildId, limit = 10) {
     GROUP BY gu.id
     ORDER BY total_cards DESC, best_power DESC
     LIMIT ?
-  `).all(guildId, limit);
+  `, guildId, limit);
 }
 
 module.exports = { getCollection, getProfile, getCard, toggleFavorite, getLeaderboard };

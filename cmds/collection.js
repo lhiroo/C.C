@@ -28,7 +28,7 @@ module.exports = {
   
     const rarity = ctx.isSlash ? ctx.source.options.getString('rarity') : null;
 
-    const { cards, total, totalPages } = getCollection(cible.id, ctx.guild.id, page, rarity);
+    const { cards, total, totalPages } = await getCollection(cible.id, ctx.guild.id, page, rarity);
 
     if (cards.length === 0) {
       return ctx.editReply(`📭 ${cible.id === ctx.user.id ? 'Tu n\'as' : `**${cible.username}** n'a`} aucune carte${rarity ? ` de rareté **${RARITIES[rarity].label}**` : ''}.`);

@@ -12,7 +12,7 @@ module.exports = {
   async execute(ctx) {
     await ctx.defer();
 
-    const result = roll(
+    const result = await roll(
       ctx.user.id,
       ctx.guild.id,
       ctx.channel.id,

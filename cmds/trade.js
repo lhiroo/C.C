@@ -31,13 +31,13 @@ module.exports = {
       if (target.id === ctx.user.id) return ctx.editReply('❌ Tu ne peux pas échanger avec toi-même.');
       if (target.bot)               return ctx.editReply('❌ Impossible d\'échanger avec un bot.');
 
-      const myCard    = getCard(myCardId,    ctx.user.id,  ctx.guild.id);
-      const theirCard = getCard(theirCardId, target.id,    ctx.guild.id);
+      const myCard    = await getCard(myCardId,    ctx.user.id,  ctx.guild.id);
+      const theirCard = await getCard(theirCardId, target.id,    ctx.guild.id);
 
       if (!myCard)    return ctx.editReply(`❌ Tu ne possèdes pas la carte #${myCardId}.`);
       if (!theirCard) return ctx.editReply(`❌ **${target.username}** ne possède pas la carte #${theirCardId}.`);
 
-      const result = proposeTrade(ctx.user.id, target.id, myCardId, theirCardId, ctx.guild.id);
+      const result = await proposeTrade(ctx.user.id, target.id, myCardId, theirCardId, ctx.guild.id);
       if (!result.ok) return ctx.editReply(`❌ ${result.reason}`);
 
       const embed = new EmbedBuilder()
@@ -53,21 +53,21 @@ module.exports = {
     }
 
     if (sub === 'accept') {
-      const pending = getPendingTrade(ctx.user.id, ctx.guild.id);
+      const pending = await getPendingTrade(ctx.user.id, ctx.guild.id);
       if (!pending) return ctx.editReply('❌ Aucun échange en attente.');
       if (pending.receiver_id !== ctx.user.id) return ctx.editReply('❌ Ce n\'est pas toi qui dois accepter cet échange.');
 
-      const result = acceptTrade(pending.id, ctx.user.id, ctx.guild.id);
+      const result = await acceptTrade(pending.id, ctx.user.id, ctx.guild.id);
       if (!result.ok) return ctx.editReply(`❌ ${result.reason}`);
 
       return ctx.editReply('✅ Échange accepté ! Les cartes ont été échangées.');
     }
 
     if (sub === 'decline') {
-      const pending = getPendingTrade(ctx.user.id, ctx.guild.id);
+      const pending = await getPendingTrade(ctx.user.id, ctx.guild.id);
       if (!pending) return ctx.editReply('❌ Aucun échange en attente.');
 
-      declineTrade(pending.id, ctx.user.id, ctx.guild.id);
+      await declineTrade(pending.id, ctx.user.id, ctx.guild.id);
       return ctx.editReply('❌ Échange refusé.');
     }
   },

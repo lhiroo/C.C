@@ -1,23 +1,40 @@
-const Database = require('better-sqlite3');
-const path     = require('path');
-const fs       = require('fs');
+const { createClient } = require('@libsql/client');
+const fs   = require('fs');
+const path = require('path');
+require('dotenv').config();
 
-const DB_DIR  = path.join(process.cwd(), 'data');
-const DB_PATH = path.join(DB_DIR, 'gacha.db');
-
-if (!fs.existsSync(DB_DIR)) fs.mkdirSync(DB_DIR, { recursive: true });
-
-const db = new Database(DB_PATH);
-
-// Performances
-db.pragma('journal_mode = WAL');
-db.pragma('foreign_keys = ON');
-db.pragma('synchronous = NORMAL');
+// Client Turso (remote) ou SQLite local en dev
+const db = createClient(
+  process.env.TURSO_URL
+    ? {
+        url:       process.env.TURSO_URL,
+        authToken: process.env.TURSO_TOKEN,
+      }
+    : {
+        // Fallback SQLite local pour développement
+        url: `file:${path.join(process.cwd(), 'data', 'ccbot.db')}`,
+      }
+);
 
 // Migrations
-const schema = fs.readFileSync(
-  path.join(__dirname, 'schema.sql'), 'utf-8'
-);
-db.exec(schema);
+async function migrate() {
+  const schema = fs.readFileSync(
+    path.join(__dirname, 'schema.sql'), 'utf-8'
+  );
+
+  // Exécuter chaque statement séparément
+  const statements = schema
+    .split(';')
+    .map(s => s.trim())
+    .filter(Boolean);
+
+  for (const stmt of statements) {
+    await db.execute(stmt);
+  }
+
+  console.log('[DB] Migrations appliquées ✓');
+}
+
+migrate().catch(console.error);
 
 module.exports = db;

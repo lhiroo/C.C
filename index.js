@@ -1,7 +1,7 @@
 const { Client, GatewayIntentBits, Collection, MessageFlags, EmbedBuilder, Partials } = require('discord.js');
 const { buildCtx } = require('./utils/ctx');
 const { getConfig } = require('./systems/config')
-const { migrateCharactersTable, seedCharacters, cleanExpiredRolls } = require('./systems/gacha/roller');
+const { seedCharacters, loadCharacterCache, claim, cleanExpiredRolls } = require('./systems/gacha/roller');
 const fs = require('fs');
 require('dotenv').config();
 
@@ -73,17 +73,11 @@ async function logCommande({ auteurId, salonId, contenu, logsChannel }) {
 client.on('interactionCreate', async interaction => {
 
   // BOUTONS
-  if (interaction.isButton()) {
-
-      // --------------- Bouton claim gacha ---------------------
   if (interaction.customId.startsWith('claim_')) {
   try {
     const rollId = parseInt(interaction.customId.replace('claim_', ''));
 
-    const { claim } = require('./systems/gacha/roller');
-    const { EmbedBuilder } = require('discord.js');
-
-    const result = claim(
+    const result = await claim(   // <-- await obligatoire depuis migration Turso
       rollId,
       interaction.user.id,
       interaction.guild.id,
@@ -92,7 +86,7 @@ client.on('interactionCreate', async interaction => {
 
     if (!result.ok) {
       return interaction.reply({
-        content: `❌ ${result.reason}`,
+        content: `❌ ${result.reason ?? 'Une erreur est survenue.'}`,
         flags: 64
       });
     }
@@ -139,13 +133,11 @@ client.on('interactionCreate', async interaction => {
       }
     }
   }
-}
 // ------------ Ignorer les interactions trop vieilles ------------------
+  if (!interaction.isButton() && !interaction.isCommand()) return;
+  
   const age = Date.now() - interaction.createdTimestamp;
-  if (age > 2500) {
-    console.warn(`[Interaction ignorée] /${interaction.commandName} trop vieille (${age}ms)`);
-    return;
-  }
+  if (age > 2500 && !interaction.isButton()) return
 
   const command = client.commands.get(interaction.commandName);
   if (!command) return;
@@ -219,15 +211,13 @@ client.on('messageCreate', async message => {
 })
 
 // ─── Prêt ────────────────────────────────────────────────────────
-client.once('clientReady', () => {
+client.once('clientReady', async () => {
   console.log(`✅ ${client.user.tag} est en ligne`);
   console.log(`📡 Connecté sur ${client.guilds.cache.size} serveur(s)`);
 
-  // Seed les personnages en BDD
-  migrateCharactersTable()
-  seedCharacters();
+  await seedCharacters();
+  await loadCharacterCache();
 
-  // Nettoyer les rolls expirés toutes les 5 minutes
   setInterval(cleanExpiredRolls, 5 * 60 * 1000);
 });
 

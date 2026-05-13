@@ -1,20 +1,14 @@
-const {
-  SlashCommandBuilder,
-  EmbedBuilder
-} = require('discord.js');
-
-const db = require('../db/database');
-const { RARITIES } = require('../systems/gacha/drops');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { get }                               = require('../db/query');
+const { findCharacter }                     = require('../systems/gacha/roller');
+const { RARITIES }                          = require('../systems/gacha/drops');
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('character')
-    .setDescription('Affiche les détails d’un personnage')
+    .setDescription("Affiche les détails d'un personnage")
     .addStringOption(option =>
-      option
-        .setName('nom')
-        .setDescription('Nom du personnage')
-        .setRequired(true)
+      option.setName('nom').setDescription('Nom du personnage').setRequired(true)
     ),
 
   name: 'character',
@@ -23,96 +17,34 @@ module.exports = {
   async execute(ctx) {
     await ctx.defer();
 
-    // Slash command
-    let search;
+    let search = ctx.isSlash ? ctx.source.options.getString('nom') : ctx.args.join(' ');
+    if (!search) return ctx.editReply('❌ Tu dois préciser un nom de personnage.');
 
-    if (ctx.isSlash) {
-      search = ctx.source.options.getString('nom');
-    }
-
-    // Prefix command
-    else {
-      search = ctx.args.join(' ');
-    }
-
-    if (!search) {
-      return ctx.editReply(
-        '❌ Tu dois préciser un nom de personnage.'
-      );
-    }
-
-    search = search.trim();
-
-    // Recherche du personnage
-    const character = db.prepare(`
-      SELECT *
-      FROM characters
-      WHERE LOWER(name) LIKE LOWER(?)
-      LIMIT 1
-    `).get(`%${search}%`);
-
-    if (!character) {
-      return ctx.editReply(
-        `❌ Aucun personnage trouvé pour : **${search}**`
-      );
-    }
+    const character = findCharacter(search.trim()); // ← mémoire, 0ms réseau
+    if (!character) return ctx.editReply(`❌ Aucun personnage trouvé pour : **${search}**`);
 
     const rarity = RARITIES[character.rarity.toLowerCase()];
+    if (!rarity) return ctx.editReply('❌ La rareté du personnage est invalide.');
 
-    if (!rarity) {
-      return ctx.editReply(
-        '❌ La rareté du personnage est invalide.'
-      );
-    }
-
-    // Nombre total possédé
-    const owned = db.prepare(`
-      SELECT COUNT(*) as count
-      FROM user_cards
-      WHERE character_id = ?
-    `).get(character.id);
+    // Seule requête DB restante : nb de copies possédées (donnée joueur, pas cacheable)
+    const owned = await get(
+      'SELECT COUNT(*) as count FROM user_cards WHERE character_id = ?',
+      character.id
+    );
 
     const embed = new EmbedBuilder()
       .setTitle(`${rarity.emoji} ${character.name}`)
-      .setDescription(
-        `**${character.anime}**\n\n*${character.description ?? 'Aucune description.'}*`
-      )
+      .setDescription(`**${character.anime}**\n\n*${character.description ?? 'Aucune description.'}*`)
       .setImage(character.image_url)
       .setColor(rarity.color)
       .addFields(
-        {
-          name: '✨ Rareté',
-          value: rarity.label,
-          inline: true
-        },
-        {
-          name: '⚔️ Puissance',
-          value: `${character.power}`,
-          inline: true
-        },
-        /*{
-          name: '❤️ Santé',
-          value: `${character.health}`,
-          inline: true
-        },
-        {
-          name: '💨 Vitesse',
-          value: `${character.speed}`,
-          inline: true
-        },*/
-        /*{
-          name: '🆔 ID',
-          value: `${character.id}`,
-          inline: true
-        }*/
+        { name: '✨ Rareté',    value: rarity.label,         inline: true },
+        { name: '⚔️ Puissance', value: `${character.power}`, inline: true },
+        { name: '👥 Possédé',   value: `${owned?.count ?? 0} fois`, inline: true },
       )
-      .setFooter({
-        text: `Demandé par ${ctx.user.username}`
-      })
+      .setFooter({ text: `Demandé par ${ctx.user.username}` })
       .setTimestamp();
 
-    return ctx.editReply({
-      embeds: [embed]
-    });
+    return ctx.editReply({ embeds: [embed] });
   }
 };

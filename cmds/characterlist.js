@@ -1,30 +1,20 @@
-const {
-  SlashCommandBuilder,
-  EmbedBuilder,
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle
-} = require('discord.js');
-
-const db = require('../db/database');
-const { RARITIES } = require('../systems/gacha/drops');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { getAllCharacters } = require('../systems/gacha/roller');
+const { RARITIES }         = require('../systems/gacha/drops');
 
 const PAGE_SIZE = 10;
 
-function buildEmbed(page, totalPages, totalCharacters, characters) {
-  const lines = characters.map(character => {
-    const rarity = RARITIES[character.rarity.toLowerCase()];
-
-    return `${rarity?.emoji || '❓'} **${character.name}** — *${character.anime}* \`⚔️${character.power}\``;
+function buildEmbed(page, totalPages, characters, total) {
+  const lines = characters.map(c => {
+    const rarity = RARITIES[c.rarity.toLowerCase()];
+    return `${rarity?.emoji || '❓'} **${c.name}** — *${c.anime}* \`⚔️${c.power}\``;
   });
 
   return new EmbedBuilder()
     .setTitle('📚 Liste des personnages')
     .setDescription(lines.join('\n') || 'Aucun personnage.')
     .setColor(0x5865f2)
-    .setFooter({
-      text: `Page ${page}/${totalPages} • ${totalCharacters} personnages`
-    })
+    .setFooter({ text: `Page ${page}/${totalPages} • ${total} personnages` })
     .setTimestamp();
 }
 
@@ -32,95 +22,49 @@ function buildButtons(page, totalPages) {
   return new ActionRowBuilder().addComponents(
     new ButtonBuilder()
       .setCustomId(`characters_prev_${page}`)
-      .setLabel('⬅️')
-      .setStyle(ButtonStyle.Secondary)
-      .setDisabled(page <= 1),
-
+      .setLabel('⬅️').setStyle(ButtonStyle.Secondary).setDisabled(page <= 1),
     new ButtonBuilder()
       .setCustomId(`characters_next_${page}`)
-      .setLabel('➡️')
-      .setStyle(ButtonStyle.Secondary)
-      .setDisabled(page >= totalPages),
+      .setLabel('➡️').setStyle(ButtonStyle.Secondary).setDisabled(page >= totalPages),
   );
 }
 
-async function sendPage(interaction, page, edit = false) {
-  const totalCharacters = db.prepare(`
-    SELECT COUNT(*) as count
-    FROM characters
-  `).get().count;
+function getPage(page) {
+  // Tri + pagination 100% en mémoire
+  const all        = getAllCharacters().sort((a, b) => b.power - a.power);
+  const totalPages = Math.ceil(all.length / PAGE_SIZE);
 
-  const totalPages = Math.ceil(totalCharacters / PAGE_SIZE);
+  page = Math.max(1, Math.min(page, totalPages));
 
-  if (page < 1) page = 1;
-  if (page > totalPages) page = totalPages;
+  const characters = all.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  return { characters, totalPages, total: all.length, page };
+}
 
-  const offset = (page - 1) * PAGE_SIZE;
+async function sendPage(ctx, page, edit = false) {
+  const { characters, totalPages, total } = getPage(page); // ← 0 requête DB
+  const embed = buildEmbed(page, totalPages, characters, total);
+  const row   = buildButtons(page, totalPages);
 
-  const characters = db.prepare(`
-    SELECT *
-    FROM characters
-    ORDER BY power DESC
-    LIMIT ?
-    OFFSET ?
-  `).all(PAGE_SIZE, offset);
-
-  const embed = buildEmbed(
-    page,
-    totalPages,
-    totalCharacters,
-    characters
-  );
-
-  const row = buildButtons(page, totalPages);
-
-  if (edit) {
-    return interaction.update({
-      embeds: [embed],
-      components: [row]
-    });
-  }
-
-  return interaction.editReply({
-    embeds: [embed],
-    components: [row]
-  });
+  if (edit) return ctx.update({ embeds: [embed], components: [row] });
+  return ctx.editReply({ embeds: [embed], components: [row] });
 }
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('character-list')
     .setDescription('Affiche la liste des personnages'),
-
   name: 'characterlist',
   aliases: ['chars', 'persos', 'list', 'characters'],
 
   async execute(ctx) {
     await ctx.defer();
-
     await sendPage(ctx, 1);
   },
 
   async handleButton(interaction) {
-    if (!interaction.customId.startsWith('characters_')) {
-      return;
-    }
-
-    const args = interaction.customId.split('_');
-
-    const action = args[1];
-    const currentPage = parseInt(args[2]);
-
-    let newPage = currentPage;
-
-    if (action === 'prev') {
-      newPage--;
-    }
-
-    if (action === 'next') {
-      newPage++;
-    }
-
+    if (!interaction.customId.startsWith('characters_')) return;
+    const [, action, currentPage] = interaction.customId.split('_');
+    const newPage = parseInt(currentPage) + (action === 'next' ? 1 : -1);
     await sendPage(interaction, newPage, true);
   }
 };
