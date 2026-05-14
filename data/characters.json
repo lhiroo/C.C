@@ -1,5 +1,15 @@
 [
   {
+    "name": "Mr Popo",
+    "anime": "Dragon Ball Z",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/6106.jpg",
+    "rarity": "common",
+    "power": 1,
+    "health": 1,
+    "speed": 1,
+    "description": "Il ne faut pas se fier aux apparences"
+  },
+  {
     "name": "Anya Forger",
     "anime": "Spy x Family",
     "image_url": "https://myanimelist.net/images/characters/4/457933.jpg",
@@ -258,6 +268,686 @@
     "health": 1800,
     "speed": 2000,
     "description": "Le guerrier du désert."
+  },
+  {
+    "name": "Alphonse Elric",
+    "anime": "Fullmetal Alchemist Brotherhood",
+    "image_url": "https://myanimelist.net/images/characters/5/54265.jpg",
+    "rarity": "uncommon",
+    "power": 2800,
+    "health": 3000,
+    "speed": 2200,
+    "description": "Armure d'acier au cœur tendre."
+  },
+  {
+    "name": "Aoi Todo",
+    "anime": "Jujutsu Kaisen",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b137975-6TH7PiLWJaqy.png",
+    "rarity": "uncommon",
+    "power": 2800,
+    "health": 2700,
+    "speed": 2600,
+    "description": "Mon meilleur ami."
+  },
+  {
+    "name": "Brook",
+    "anime": "One Piece",
+    "image_url": "https://myanimelist.net/img/sp/icon/apple-touch-icon-256.png",
+    "rarity": "uncommon",
+    "power": 2600,
+    "health": 2000,
+    "speed": 2800,
+    "description": "Yohohoho."
+  },
+  {
+    "name": "Bulma",
+    "anime": "Dragon Ball Z",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b678-2YCe13F0tFos.jpg",
+    "rarity": "uncommon",
+    "power": 900,
+    "health": 1400,
+    "speed": 1600,
+    "description": "Génie scientifique."
+  },
+  {
+    "name": "Chrome",
+    "anime": "Dr. Stone",
+    "image_url": "https://myanimelist.net/images/characters/11/574273.jpg",
+    "rarity": "uncommon",
+    "power": 2000,
+    "health": 2200,
+    "speed": 2100,
+    "description": "Sorcier de la science."
+  },
+  {
+    "name": "Darkness",
+    "anime": "Konosuba",
+    "image_url": "https://myanimelist.net/images/characters/12/534386.jpg",
+    "rarity": "uncommon",
+    "power": 2200,
+    "health": 3000,
+    "speed": 1400,
+    "description": "Croisée masochiste."
+  },
+  {
+    "name": "Feitan Portor",
+    "anime": "Hunter x Hunter",
+    "image_url": "https://myanimelist.net/images/characters/10/174721.jpg",
+    "rarity": "uncommon",
+    "power": 2900,
+    "health": 2400,
+    "speed": 3000,
+    "description": "Douleur emprisonnée."
+  },
+  {
+    "name": "Franky",
+    "anime": "One Piece",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/n64-ChX6ZzHHjXqA.png",
+    "rarity": "uncommon",
+    "power": 2800,
+    "health": 3000,
+    "speed": 2000,
+    "description": "Cyborg SUPERRR."
+  },
+  {
+    "name": "Hinata Shoyo",
+    "anime": "Haikyuu",
+    "image_url": "https://myanimelist.net/images/characters/11/243919.jpg",
+    "rarity": "uncommon",
+    "power": 1900,
+    "health": 2100,
+    "speed": 2800,
+    "description": "Le petit géant du volley."
+  },
+  {
+    "name": "Historia Reiss",
+    "anime": "Attack on Titan",
+    "image_url": "https://myanimelist.net/images/characters/13/417664.jpg",
+    "rarity": "uncommon",
+    "power": 2000,
+    "health": 2200,
+    "speed": 2400,
+    "description": "La vraie reine."
+  },
+  {
+    "name": "Iida Tenya",
+    "anime": "My Hero Academia",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b89222-TL8MQM3wJgEB.png",
+    "rarity": "uncommon",
+    "power": 2300,
+    "health": 2200,
+    "speed": 3000,
+    "description": "Moteur intégré."
+  },
+  {
+    "name": "Jean Kirstein",
+    "anime": "Attack on Titan",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b46498-ritqAj9FW6jX.png",
+    "rarity": "uncommon",
+    "power": 2400,
+    "health": 2300,
+    "speed": 2500,
+    "description": "Leader naturel malgré lui."
+  },
+  {
+    "name": "Kageyama Tobio",
+    "anime": "Haikyuu",
+    "image_url": "https://myanimelist.net/images/characters/13/417874.jpg",
+    "rarity": "uncommon",
+    "power": 2200,
+    "health": 2000,
+    "speed": 2600,
+    "description": "Le roi du terrain."
+  },
+  {
+    "name": "Kanao Tsuyuri",
+    "anime": "Demon Slayer",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b139038-OcOoDUyLEsRn.png",
+    "rarity": "uncommon",
+    "power": 2700,
+    "health": 2500,
+    "speed": 3000,
+    "description": "Œil de fleur."
+  },
+  {
+    "name": "Kirishima Eijiro",
+    "anime": "My Hero Academia",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b89243-QLmUyyZk5K2l.png",
+    "rarity": "uncommon",
+    "power": 2600,
+    "health": 3000,
+    "speed": 2000,
+    "description": "Durcissement."
+  },
+  {
+    "name": "Leorio Paradinight",
+    "anime": "Hunter x Hunter",
+    "image_url": "https://myanimelist.net/images/characters/11/549311.jpg",
+    "rarity": "uncommon",
+    "power": 2200,
+    "health": 2400,
+    "speed": 2000,
+    "description": "Futur médecin déterminé."
+  },
+  {
+    "name": "Misa Amane",
+    "anime": "Death Note",
+    "image_url": "https://myanimelist.net/images/characters/5/30971.jpg",
+    "rarity": "uncommon",
+    "power": 1600,
+    "health": 1800,
+    "speed": 2000,
+    "description": "Le second Kira."
+  },
+  {
+    "name": "Momo Yaoyorozu",
+    "anime": "My Hero Academia",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b89241-Q8KzAfX4Qe2y.png",
+    "rarity": "uncommon",
+    "power": 2500,
+    "health": 2400,
+    "speed": 2000,
+    "description": "Création de toutes pièces."
+  },
+  {
+    "name": "Nami",
+    "anime": "One Piece",
+    "image_url": "https://myanimelist.net/images/characters/8/627117.jpg",
+    "rarity": "uncommon",
+    "power": 1800,
+    "health": 2000,
+    "speed": 2700,
+    "description": "La navigatrice aux millions."
+  },
+  {
+    "name": "Neji Hyuga",
+    "anime": "Naruto",
+    "image_url": "https://myanimelist.net/images/characters/2/105538.jpg",
+    "rarity": "uncommon",
+    "power": 2700,
+    "health": 2400,
+    "speed": 2800,
+    "description": "Destin et Paume des huit trigrammes."
+  },
+  {
+    "name": "Nezuko Kamado",
+    "anime": "Demon Slayer",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b127518-NRlq1CQ1v1ro.png",
+    "rarity": "uncommon",
+    "power": 2800,
+    "health": 2900,
+    "speed": 2700,
+    "description": "Démon au cœur humain."
+  },
+  {
+    "name": "Nico Robin",
+    "anime": "One Piece",
+    "image_url": "https://myanimelist.net/images/characters/16/363700.jpg",
+    "rarity": "uncommon",
+    "power": 2500,
+    "health": 2200,
+    "speed": 2100,
+    "description": "Fleur-Fleur."
+  },
+  {
+    "name": "Nobara Kugisaki",
+    "anime": "Jujutsu Kaisen",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b133700-f6sOO3TcgLV6.png",
+    "rarity": "uncommon",
+    "power": 2900,
+    "health": 2600,
+    "speed": 2400,
+    "description": "Maillet et clous."
+  },
+  {
+    "name": "Piccolo",
+    "anime": "Dragon Ball Z",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b914-KuS8AWjqBrqa.jpg",
+    "rarity": "uncommon",
+    "power": 2900,
+    "health": 2700,
+    "speed": 2500,
+    "description": "Démon Namékien."
+  },
+  {
+    "name": "Reiner Braun",
+    "anime": "Attack on Titan",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b46484-P6A2GjNQn49F.png",
+    "rarity": "uncommon",
+    "power": 2800,
+    "health": 3000,
+    "speed": 2200,
+    "description": "Titan cuirassé."
+  },
+  {
+    "name": "Riza Hawkeye",
+    "anime": "Fullmetal Alchemist Brotherhood",
+    "image_url": "https://myanimelist.net/images/characters/3/451785.jpg",
+    "rarity": "uncommon",
+    "power": 2600,
+    "health": 2300,
+    "speed": 2500,
+    "description": "Sniper de l'armée."
+  },
+  {
+    "name": "Ryuk",
+    "anime": "Death Note",
+    "image_url": "https://myanimelist.net/images/characters/10/59125.jpg",
+    "rarity": "uncommon",
+    "power": 2500,
+    "health": 2800,
+    "speed": 2300,
+    "description": "Les pommes et l'ennui."
+  },
+  {
+    "name": "Shikamaru Nara",
+    "anime": "Naruto",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b2007-QaesJlIZDifj.jpg",
+    "rarity": "uncommon",
+    "power": 2000,
+    "health": 2100,
+    "speed": 1800,
+    "description": "Trop fatigant."
+  },
+  {
+    "name": "Shinji Ikari",
+    "anime": "Neon Genesis Evangelion",
+    "image_url": "https://myanimelist.net/images/characters/5/225177.jpg",
+    "rarity": "uncommon",
+    "power": 2100,
+    "health": 1900,
+    "speed": 1800,
+    "description": "Monte dans l'Evangelion."
+  },
+  {
+    "name": "Suguru Geto",
+    "anime": "Jujutsu Kaisen",
+    "image_url": "https://myanimelist.net/images/characters/7/619361.jpg",
+    "rarity": "uncommon",
+    "power": 2900,
+    "health": 2700,
+    "speed": 2500,
+    "description": "Manipulation des fléaux."
+  },
+  {
+    "name": "Winry Rockbell",
+    "anime": "Fullmetal Alchemist Brotherhood",
+    "image_url": "https://myanimelist.net/images/characters/15/84336.jpg",
+    "rarity": "uncommon",
+    "power": 1200,
+    "health": 1800,
+    "speed": 1700,
+    "description": "Mécano passionnée."
+  },
+  {
+    "name": "Android 18",
+    "anime": "Dragon Ball Z",
+    "image_url": "https://myanimelist.net/images/characters/5/537661.jpg",
+    "rarity": "rare",
+    "power": 5900,
+    "health": 5600,
+    "speed": 6000,
+    "description": "Énergie infinie."
+  },
+  {
+    "name": "Arthur Boyle",
+    "anime": "Fire Force",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/n130715-IYNBAHBQa14y.png",
+    "rarity": "rare",
+    "power": 5800,
+    "health": 5400,
+    "speed": 6200,
+    "description": "Chevalier du plasma."
+  },
+  {
+    "name": "Asta",
+    "anime": "Black Clover",
+    "image_url": "https://myanimelist.net/img/sp/icon/apple-touch-icon-256.png",
+    "rarity": "rare",
+    "power": 6100,
+    "health": 6500,
+    "speed": 5700,
+    "description": "Anti-magie absolue."
+  },
+  {
+    "name": "Asuna Yuuki",
+    "anime": "Sword Art Online",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b36828-j5ib0adAzGMx.png",
+    "rarity": "rare",
+    "power": 5400,
+    "health": 4700,
+    "speed": 7200,
+    "description": "L'éclair fulgurant."
+  },
+  {
+    "name": "Byakuya Kuchiki",
+    "anime": "Bleach",
+    "image_url": "https://myanimelist.net/images/characters/7/100098.jpg",
+    "rarity": "rare",
+    "power": 6500,
+    "health": 6100,
+    "speed": 7000,
+    "description": "Mille pétales de cerisier."
+  },
+  {
+    "name": "Crocodile",
+    "anime": "One Piece",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b2749-e8ebEBN1SlS2.png",
+    "rarity": "rare",
+    "power": 6200,
+    "health": 5700,
+    "speed": 5900,
+    "description": "Maître du sable."
+  },
+  {
+    "name": "Deidara",
+    "anime": "Naruto Shippuden",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b1902-JsEFRFwjmtZJ.png",
+    "rarity": "rare",
+    "power": 6600,
+    "health": 5200,
+    "speed": 6100,
+    "description": "L'art est explosion."
+  },
+  {
+    "name": "Edward Elric",
+    "anime": "Fullmetal Alchemist Brotherhood",
+    "image_url": "https://myanimelist.net/images/characters/9/72533.jpg",
+    "rarity": "rare",
+    "power": 5900,
+    "health": 5400,
+    "speed": 6300,
+    "description": "Alchimiste en acier."
+  },
+  {
+    "name": "Eugeo",
+    "anime": "Sword Art Online",
+    "image_url": "https://myanimelist.net/images/characters/4/367313.jpg",
+    "rarity": "rare",
+    "power": 6400,
+    "health": 5900,
+    "speed": 6300,
+    "description": "Chevalier intègre."
+  },
+  {
+    "name": "Gaara",
+    "anime": "Naruto Shippuden",
+    "image_url": "https://myanimelist.net/images/characters/10/293375.jpg",
+    "rarity": "rare",
+    "power": 6100,
+    "health": 6400,
+    "speed": 5200,
+    "description": "Kazekage du sable."
+  },
+  {
+    "name": "Giyu Tomioka",
+    "anime": "Demon Slayer",
+    "image_url": "https://myanimelist.net/images/characters/3/423445.jpg",
+    "rarity": "rare",
+    "power": 6400,
+    "health": 6000,
+    "speed": 6800,
+    "description": "Pilier de l'eau."
+  },
+  {
+    "name": "Gohan",
+    "anime": "Dragon Ball Z",
+    "image_url": "https://myanimelist.net/images/characters/9/446314.jpg",
+    "rarity": "rare",
+    "power": 6300,
+    "health": 6000,
+    "speed": 5800,
+    "description": "Potentiel illimité."
+  },
+  {
+    "name": "Hidan",
+    "anime": "Naruto Shippuden",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b2792-lyvtbiT4COp0.jpg",
+    "rarity": "rare",
+    "power": 6200,
+    "health": 7000,
+    "speed": 5000,
+    "description": "Immortalité maudite."
+  },
+  {
+    "name": "Hinata Hyuga",
+    "anime": "Naruto Shippuden",
+    "image_url": "https://myanimelist.net/images/characters/6/278736.jpg",
+    "rarity": "rare",
+    "power": 5400,
+    "health": 5100,
+    "speed": 5800,
+    "description": "Protection absolue."
+  },
+  {
+    "name": "Hisoka Morow",
+    "anime": "Hunter x Hunter",
+    "image_url": "https://myanimelist.net/images/characters/3/174561.jpg",
+    "rarity": "rare",
+    "power": 6800,
+    "health": 6300,
+    "speed": 6900,
+    "description": "Magicien imprévisible."
+  },
+  {
+    "name": "Inosuke Hashibira",
+    "anime": "Demon Slayer",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/n129130-SJC0Kn1DU39E.jpg",
+    "rarity": "rare",
+    "power": 5400,
+    "health": 5000,
+    "speed": 6200,
+    "description": "Guerrier sauvage."
+  },
+  {
+    "name": "Kakashi Hatake",
+    "anime": "Naruto",
+    "image_url": "https://myanimelist.net/images/characters/7/284129.jpg",
+    "rarity": "rare",
+    "power": 6000,
+    "health": 5700,
+    "speed": 6500,
+    "description": "Copiste aux mille techniques."
+  },
+  {
+    "name": "Kurapika",
+    "anime": "Hunter x Hunter",
+    "image_url": "https://myanimelist.net/images/characters/3/549312.jpg",
+    "rarity": "rare",
+    "power": 6200,
+    "health": 5500,
+    "speed": 6700,
+    "description": "Chaînes impératives."
+  },
+  {
+    "name": "Lucy Heartfilia",
+    "anime": "Fairy Tail",
+    "image_url": "https://myanimelist.net/images/characters/7/67774.jpg",
+    "rarity": "rare",
+    "power": 6200,
+    "health": 5600,
+    "speed": 6100,
+    "description": "Mage aux clés stellaires."
+  },
+  {
+    "name": "Megumin",
+    "anime": "Konosuba",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b89361-tq8PQQ4MmF0M.png",
+    "rarity": "rare",
+    "power": 7500,
+    "health": 3200,
+    "speed": 3000,
+    "description": "EXPLOSION !"
+  },
+  {
+    "name": "Mikasa Ackerman",
+    "anime": "Attack on Titan",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b40881-F3gr1PkreDvj.png",
+    "rarity": "rare",
+    "power": 6100,
+    "health": 5800,
+    "speed": 7600,
+    "description": "Guerrière d'élite."
+  },
+  {
+    "name": "Mikey",
+    "anime": "Tokyo Revengers",
+    "image_url": "https://myanimelist.net/images/characters/16/284708.jpg",
+    "rarity": "rare",
+    "power": 6300,
+    "health": 5700,
+    "speed": 7100,
+    "description": "Invincible Mikey."
+  },
+  {
+    "name": "Mitsuri Kanroji",
+    "anime": "Demon Slayer",
+    "image_url": "https://myanimelist.net/images/characters/11/514229.jpg",
+    "rarity": "rare",
+    "power": 6300,
+    "health": 5900,
+    "speed": 7500,
+    "description": "Pilier de l'amour."
+  },
+  {
+    "name": "Natsu Dragneel",
+    "anime": "Fairy Tail",
+    "image_url": "https://myanimelist.net/images/characters/15/594274.jpg",
+    "rarity": "rare",
+    "power": 6400,
+    "health": 6800,
+    "speed": 5900,
+    "description": "Avaleur de flammes."
+  },
+  {
+    "name": "Portgas D. Ace",
+    "anime": "One Piece",
+    "image_url": "https://myanimelist.net/images/characters/2/72220.jpg",
+    "rarity": "rare",
+    "power": 6400,
+    "health": 5800,
+    "speed": 6200,
+    "description": "Poing ardent."
+  },
+  {
+    "name": "Power",
+    "anime": "Chainsaw Man",
+    "image_url": "https://myanimelist.net/images/characters/7/494969.jpg",
+    "rarity": "rare",
+    "power": 6300,
+    "health": 5900,
+    "speed": 6100,
+    "description": "Démon du sang chaotique."
+  },
+  {
+    "name": "Rob Lucci",
+    "anime": "One Piece",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b5677-ZrZunVe7Kq5P.png",
+    "rarity": "rare",
+    "power": 6500,
+    "health": 5800,
+    "speed": 6700,
+    "description": "Assassin du CP9."
+  },
+  {
+    "name": "Roy Mustang",
+    "anime": "Fullmetal Alchemist Brotherhood",
+    "image_url": "https://myanimelist.net/images/characters/11/510227.jpg",
+    "rarity": "rare",
+    "power": 6700,
+    "health": 5800,
+    "speed": 6000,
+    "description": "Le colonel flamme."
+  },
+  {
+    "name": "Rukia Kuchiki",
+    "anime": "Bleach",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b6-25WoBeWMZXBc.png",
+    "rarity": "rare",
+    "power": 5900,
+    "health": 5200,
+    "speed": 6100,
+    "description": "Shinigami déterminée."
+  },
+  {
+    "name": "Sanji Vinsmoke",
+    "anime": "One Piece",
+    "image_url": "https://myanimelist.net/images/characters/13/288199.jpg",
+    "rarity": "rare",
+    "power": 5800,
+    "health": 5300,
+    "speed": 7000,
+    "description": "Flamme noire du Diable."
+  },
+  {
+    "name": "Senku Ishigami",
+    "anime": "Dr. Stone",
+    "image_url": "https://myanimelist.net/images/characters/4/478454.jpg",
+    "rarity": "rare",
+    "power": 3500,
+    "health": 4000,
+    "speed": 4200,
+    "description": "10 milliards % de science."
+  },
+  {
+    "name": "Shinobu Kocho",
+    "anime": "Demon Slayer",
+    "image_url": "https://myanimelist.net/images/characters/3/386591.jpg",
+    "rarity": "rare",
+    "power": 5200,
+    "health": 4800,
+    "speed": 8200,
+    "description": "Pilier des insectes."
+  },
+  {
+    "name": "Shinra Kusakabe",
+    "anime": "Fire Force",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/n120462-oSWdz2MhkbDE.png",
+    "rarity": "rare",
+    "power": 6000,
+    "health": 5200,
+    "speed": 7800,
+    "description": "Le démon des flammes."
+  },
+  {
+    "name": "Tengen Uzui",
+    "anime": "Demon Slayer",
+    "image_url": "https://myanimelist.net/images/characters/16/387706.jpg",
+    "rarity": "rare",
+    "power": 6600,
+    "health": 6200,
+    "speed": 7200,
+    "description": "Pilier du son."
+  },
+  {
+    "name": "Trafalgar Law",
+    "anime": "One Piece",
+    "image_url": "https://myanimelist.net/images/characters/10/258757.jpg",
+    "rarity": "rare",
+    "power": 6200,
+    "health": 5500,
+    "speed": 6400,
+    "description": "Chirurgie de la mort."
+  },
+  {
+    "name": "Yor Forger",
+    "anime": "Spy x Family",
+    "image_url": "https://myanimelist.net/images/characters/11/457934.jpg",
+    "rarity": "rare",
+    "power": 6500,
+    "health": 5800,
+    "speed": 6900,
+    "description": "Maman tueuse."
+  },
+  {
+    "name": "Zenitsu Agatsuma",
+    "anime": "Demon Slayer",
+    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b129131-FZrQ7lSlxmEr.png",
+    "rarity": "rare",
+    "power": 5200,
+    "health": 4500,
+    "speed": 7500,
+    "description": "La foudre endormie."
   },
   {
     "name": "Aki Hayakawa",
@@ -743,7 +1433,7 @@
     "name": "Kirito",
     "anime": "Sword Art Online",
     "image_url": "https://myanimelist.net/images/characters/15/542694.jpg",
-    "rarity": "legendary",
+    "rarity": "rare",
     "power": 9100,
     "health": 8400,
     "speed": 9200,
@@ -883,7 +1573,7 @@
     "name": "Big Mom",
     "anime": "One Piece",
     "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b54495-3x1TzSzPEOLd.jpg",
-    "rarity": "mythic",
+    "rarity": "epic",
     "power": 9900,
     "health": 9950,
     "speed": 7600,
@@ -933,7 +1623,7 @@
     "name": "Hashirama Senju",
     "anime": "Naruto",
     "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/n12464-fcgqkCPZoREw.png",
-    "rarity": "mythic",
+    "rarity": "legendary",
     "power": 9850,
     "health": 9800,
     "speed": 8600,
@@ -983,7 +1673,7 @@
     "name": "Makima",
     "anime": "Chainsaw Man",
     "image_url": "https://myanimelist.net/images/characters/4/489561.jpg",
-    "rarity": "mythic",
+    "rarity": "rare",
     "power": 9800,
     "health": 9200,
     "speed": 9000,
@@ -993,7 +1683,7 @@
     "name": "Meliodas",
     "anime": "Seven Deadly Sins",
     "image_url": "https://myanimelist.net/images/characters/2/255447.jpg",
-    "rarity": "mythic",
+    "rarity": "legendary",
     "power": 9850,
     "health": 9100,
     "speed": 9400,
@@ -1003,7 +1693,7 @@
     "name": "Minato Namikaze",
     "anime": "Naruto",
     "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b2535-Xq9WKNPJQEt3.png",
-    "rarity": "mythic",
+    "rarity": "epic",
     "power": 9800,
     "health": 8900,
     "speed": 9990,
@@ -1053,7 +1743,7 @@
     "name": "Toji Fushiguro",
     "anime": "Jujutsu Kaisen",
     "image_url": "https://myanimelist.net/images/characters/2/517123.jpg",
-    "rarity": "mythic",
+    "rarity": "legendary",
     "power": 9800,
     "health": 9000,
     "speed": 9700,
@@ -1088,685 +1778,5 @@
     "health": 9300,
     "speed": 9100,
     "description": "Pouvoir maudit illimité."
-  },
-  {
-    "name": "Android 18",
-    "anime": "Dragon Ball Z",
-    "image_url": "https://myanimelist.net/images/characters/5/537661.jpg",
-    "rarity": "rare",
-    "power": 5900,
-    "health": 5600,
-    "speed": 6000,
-    "description": "Énergie infinie."
-  },
-  {
-    "name": "Arthur Boyle",
-    "anime": "Fire Force",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/n130715-IYNBAHBQa14y.png",
-    "rarity": "rare",
-    "power": 5800,
-    "health": 5400,
-    "speed": 6200,
-    "description": "Chevalier du plasma."
-  },
-  {
-    "name": "Asta",
-    "anime": "Black Clover",
-    "image_url": "https://myanimelist.net/img/sp/icon/apple-touch-icon-256.png",
-    "rarity": "rare",
-    "power": 6100,
-    "health": 6500,
-    "speed": 5700,
-    "description": "Anti-magie absolue."
-  },
-  {
-    "name": "Asuna Yuuki",
-    "anime": "Sword Art Online",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b36828-j5ib0adAzGMx.png",
-    "rarity": "rare",
-    "power": 5400,
-    "health": 4700,
-    "speed": 7200,
-    "description": "L'éclair fulgurant."
-  },
-  {
-    "name": "Byakuya Kuchiki",
-    "anime": "Bleach",
-    "image_url": "https://myanimelist.net/images/characters/7/100098.jpg",
-    "rarity": "rare",
-    "power": 6500,
-    "health": 6100,
-    "speed": 7000,
-    "description": "Mille pétales de cerisier."
-  },
-  {
-    "name": "Crocodile",
-    "anime": "One Piece",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b2749-e8ebEBN1SlS2.png",
-    "rarity": "rare",
-    "power": 6200,
-    "health": 5700,
-    "speed": 5900,
-    "description": "Maître du sable."
-  },
-  {
-    "name": "Deidara",
-    "anime": "Naruto Shippuden",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b1902-JsEFRFwjmtZJ.png",
-    "rarity": "rare",
-    "power": 6600,
-    "health": 5200,
-    "speed": 6100,
-    "description": "L'art est explosion."
-  },
-  {
-    "name": "Edward Elric",
-    "anime": "Fullmetal Alchemist Brotherhood",
-    "image_url": "https://myanimelist.net/images/characters/9/72533.jpg",
-    "rarity": "rare",
-    "power": 5900,
-    "health": 5400,
-    "speed": 6300,
-    "description": "Alchimiste en acier."
-  },
-  {
-    "name": "Eugeo",
-    "anime": "Sword Art Online",
-    "image_url": "https://myanimelist.net/images/characters/4/367313.jpg",
-    "rarity": "rare",
-    "power": 6400,
-    "health": 5900,
-    "speed": 6300,
-    "description": "Chevalier intègre."
-  },
-  {
-    "name": "Gaara",
-    "anime": "Naruto Shippuden",
-    "image_url": "https://myanimelist.net/images/characters/10/293375.jpg",
-    "rarity": "rare",
-    "power": 6100,
-    "health": 6400,
-    "speed": 5200,
-    "description": "Kazekage du sable."
-  },
-  {
-    "name": "Giyu Tomioka",
-    "anime": "Demon Slayer",
-    "image_url": "https://myanimelist.net/images/characters/3/423445.jpg",
-    "rarity": "rare",
-    "power": 6400,
-    "health": 6000,
-    "speed": 6800,
-    "description": "Pilier de l'eau."
-  },
-  {
-    "name": "Gohan",
-    "anime": "Dragon Ball Z",
-    "image_url": "https://myanimelist.net/images/characters/9/446314.jpg",
-    "rarity": "rare",
-    "power": 6300,
-    "health": 6000,
-    "speed": 5800,
-    "description": "Potentiel illimité."
-  },
-  {
-    "name": "Hidan",
-    "anime": "Naruto Shippuden",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b2792-lyvtbiT4COp0.jpg",
-    "rarity": "rare",
-    "power": 6200,
-    "health": 7000,
-    "speed": 5000,
-    "description": "Immortalité maudite."
-  },
-  {
-    "name": "Hinata Hyuga",
-    "anime": "Naruto Shippuden",
-    "image_url": "https://myanimelist.net/images/characters/6/278736.jpg",
-    "rarity": "rare",
-    "power": 5400,
-    "health": 5100,
-    "speed": 5800,
-    "description": "Protection absolue."
-  },
-  {
-    "name": "Hisoka Morow",
-    "anime": "Hunter x Hunter",
-    "image_url": "https://myanimelist.net/images/characters/3/174561.jpg",
-    "rarity": "rare",
-    "power": 6800,
-    "health": 6300,
-    "speed": 6900,
-    "description": "Magicien imprévisible."
-  },
-  {
-    "name": "Inosuke Hashibira",
-    "anime": "Demon Slayer",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/n129130-SJC0Kn1DU39E.jpg",
-    "rarity": "rare",
-    "power": 5400,
-    "health": 5000,
-    "speed": 6200,
-    "description": "Guerrier sauvage."
-  },
-  {
-    "name": "Kakashi Hatake",
-    "anime": "Naruto",
-    "image_url": "https://myanimelist.net/images/characters/7/284129.jpg",
-    "rarity": "rare",
-    "power": 6000,
-    "health": 5700,
-    "speed": 6500,
-    "description": "Copiste aux mille techniques."
-  },
-  {
-    "name": "Kurapika",
-    "anime": "Hunter x Hunter",
-    "image_url": "https://myanimelist.net/images/characters/3/549312.jpg",
-    "rarity": "rare",
-    "power": 6200,
-    "health": 5500,
-    "speed": 6700,
-    "description": "Chaînes impératives."
-  },
-  {
-    "name": "Lucy Heartfilia",
-    "anime": "Fairy Tail",
-    "image_url": "https://myanimelist.net/images/characters/7/67774.jpg",
-    "rarity": "rare",
-    "power": 6200,
-    "health": 5600,
-    "speed": 6100,
-    "description": "Mage aux clés stellaires."
-  },
-  {
-    "name": "Megumin",
-    "anime": "Konosuba",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b89361-tq8PQQ4MmF0M.png",
-    "rarity": "rare",
-    "power": 7500,
-    "health": 3200,
-    "speed": 3000,
-    "description": "EXPLOSION !"
-  },
-  {
-    "name": "Mikasa Ackerman",
-    "anime": "Attack on Titan",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b40881-F3gr1PkreDvj.png",
-    "rarity": "rare",
-    "power": 6100,
-    "health": 5800,
-    "speed": 7600,
-    "description": "Guerrière d'élite."
-  },
-  {
-    "name": "Mikey",
-    "anime": "Tokyo Revengers",
-    "image_url": "https://myanimelist.net/images/characters/16/284708.jpg",
-    "rarity": "rare",
-    "power": 6300,
-    "health": 5700,
-    "speed": 7100,
-    "description": "Invincible Mikey."
-  },
-  {
-    "name": "Mitsuri Kanroji",
-    "anime": "Demon Slayer",
-    "image_url": "https://myanimelist.net/images/characters/11/514229.jpg",
-    "rarity": "rare",
-    "power": 6300,
-    "health": 5900,
-    "speed": 7500,
-    "description": "Pilier de l'amour."
-  },
-  {
-    "name": "Natsu Dragneel",
-    "anime": "Fairy Tail",
-    "image_url": "https://myanimelist.net/images/characters/15/594274.jpg",
-    "rarity": "rare",
-    "power": 6400,
-    "health": 6800,
-    "speed": 5900,
-    "description": "Avaleur de flammes."
-  },
-  {
-    "name": "Portgas D. Ace",
-    "anime": "One Piece",
-    "image_url": "https://myanimelist.net/images/characters/2/72220.jpg",
-    "rarity": "rare",
-    "power": 6400,
-    "health": 5800,
-    "speed": 6200,
-    "description": "Poing ardent."
-  },
-  {
-    "name": "Power",
-    "anime": "Chainsaw Man",
-    "image_url": "https://myanimelist.net/images/characters/7/494969.jpg",
-    "rarity": "rare",
-    "power": 6300,
-    "health": 5900,
-    "speed": 6100,
-    "description": "Démon du sang chaotique."
-  },
-  {
-    "name": "Rob Lucci",
-    "anime": "One Piece",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b5677-ZrZunVe7Kq5P.png",
-    "rarity": "rare",
-    "power": 6500,
-    "health": 5800,
-    "speed": 6700,
-    "description": "Assassin du CP9."
-  },
-  {
-    "name": "Roy Mustang",
-    "anime": "Fullmetal Alchemist Brotherhood",
-    "image_url": "https://myanimelist.net/images/characters/11/510227.jpg",
-    "rarity": "rare",
-    "power": 6700,
-    "health": 5800,
-    "speed": 6000,
-    "description": "Le colonel flamme."
-  },
-  {
-    "name": "Rukia Kuchiki",
-    "anime": "Bleach",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b6-25WoBeWMZXBc.png",
-    "rarity": "rare",
-    "power": 5900,
-    "health": 5200,
-    "speed": 6100,
-    "description": "Shinigami déterminée."
-  },
-  {
-    "name": "Sanji Vinsmoke",
-    "anime": "One Piece",
-    "image_url": "https://myanimelist.net/images/characters/13/288199.jpg",
-    "rarity": "rare",
-    "power": 5800,
-    "health": 5300,
-    "speed": 7000,
-    "description": "Flamme noire du Diable."
-  },
-  {
-    "name": "Senku Ishigami",
-    "anime": "Dr. Stone",
-    "image_url": "https://myanimelist.net/images/characters/4/478454.jpg",
-    "rarity": "rare",
-    "power": 3500,
-    "health": 4000,
-    "speed": 4200,
-    "description": "10 milliards % de science."
-  },
-  {
-    "name": "Shinobu Kocho",
-    "anime": "Demon Slayer",
-    "image_url": "https://myanimelist.net/images/characters/3/386591.jpg",
-    "rarity": "rare",
-    "power": 5200,
-    "health": 4800,
-    "speed": 8200,
-    "description": "Pilier des insectes."
-  },
-  {
-    "name": "Shinra Kusakabe",
-    "anime": "Fire Force",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/n120462-oSWdz2MhkbDE.png",
-    "rarity": "rare",
-    "power": 6000,
-    "health": 5200,
-    "speed": 7800,
-    "description": "Le démon des flammes."
-  },
-  {
-    "name": "Tengen Uzui",
-    "anime": "Demon Slayer",
-    "image_url": "https://myanimelist.net/images/characters/16/387706.jpg",
-    "rarity": "rare",
-    "power": 6600,
-    "health": 6200,
-    "speed": 7200,
-    "description": "Pilier du son."
-  },
-  {
-    "name": "Trafalgar Law",
-    "anime": "One Piece",
-    "image_url": "https://myanimelist.net/images/characters/10/258757.jpg",
-    "rarity": "rare",
-    "power": 6200,
-    "health": 5500,
-    "speed": 6400,
-    "description": "Chirurgie de la mort."
-  },
-  {
-    "name": "Yor Forger",
-    "anime": "Spy x Family",
-    "image_url": "https://myanimelist.net/images/characters/11/457934.jpg",
-    "rarity": "rare",
-    "power": 6500,
-    "health": 5800,
-    "speed": 6900,
-    "description": "Maman tueuse."
-  },
-  {
-    "name": "Zenitsu Agatsuma",
-    "anime": "Demon Slayer",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b129131-FZrQ7lSlxmEr.png",
-    "rarity": "rare",
-    "power": 5200,
-    "health": 4500,
-    "speed": 7500,
-    "description": "La foudre endormie."
-  },
-  {
-    "name": "Alphonse Elric",
-    "anime": "Fullmetal Alchemist Brotherhood",
-    "image_url": "https://myanimelist.net/images/characters/5/54265.jpg",
-    "rarity": "uncommon",
-    "power": 2800,
-    "health": 3000,
-    "speed": 2200,
-    "description": "Armure d'acier au cœur tendre."
-  },
-  {
-    "name": "Aoi Todo",
-    "anime": "Jujutsu Kaisen",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b137975-6TH7PiLWJaqy.png",
-    "rarity": "uncommon",
-    "power": 2800,
-    "health": 2700,
-    "speed": 2600,
-    "description": "Mon meilleur ami."
-  },
-  {
-    "name": "Brook",
-    "anime": "One Piece",
-    "image_url": "https://myanimelist.net/img/sp/icon/apple-touch-icon-256.png",
-    "rarity": "uncommon",
-    "power": 2600,
-    "health": 2000,
-    "speed": 2800,
-    "description": "Yohohoho."
-  },
-  {
-    "name": "Bulma",
-    "anime": "Dragon Ball Z",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b678-2YCe13F0tFos.jpg",
-    "rarity": "uncommon",
-    "power": 900,
-    "health": 1400,
-    "speed": 1600,
-    "description": "Génie scientifique."
-  },
-  {
-    "name": "Chrome",
-    "anime": "Dr. Stone",
-    "image_url": "https://myanimelist.net/images/characters/11/574273.jpg",
-    "rarity": "uncommon",
-    "power": 2000,
-    "health": 2200,
-    "speed": 2100,
-    "description": "Sorcier de la science."
-  },
-  {
-    "name": "Darkness",
-    "anime": "Konosuba",
-    "image_url": "https://myanimelist.net/images/characters/12/534386.jpg",
-    "rarity": "uncommon",
-    "power": 2200,
-    "health": 3000,
-    "speed": 1400,
-    "description": "Croisée masochiste."
-  },
-  {
-    "name": "Feitan Portor",
-    "anime": "Hunter x Hunter",
-    "image_url": "https://myanimelist.net/images/characters/10/174721.jpg",
-    "rarity": "uncommon",
-    "power": 2900,
-    "health": 2400,
-    "speed": 3000,
-    "description": "Douleur emprisonnée."
-  },
-  {
-    "name": "Franky",
-    "anime": "One Piece",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/n64-ChX6ZzHHjXqA.png",
-    "rarity": "uncommon",
-    "power": 2800,
-    "health": 3000,
-    "speed": 2000,
-    "description": "Cyborg SUPERRR."
-  },
-  {
-    "name": "Hinata Shoyo",
-    "anime": "Haikyuu",
-    "image_url": "https://myanimelist.net/images/characters/11/243919.jpg",
-    "rarity": "uncommon",
-    "power": 1900,
-    "health": 2100,
-    "speed": 2800,
-    "description": "Le petit géant du volley."
-  },
-  {
-    "name": "Historia Reiss",
-    "anime": "Attack on Titan",
-    "image_url": "https://myanimelist.net/images/characters/13/417664.jpg",
-    "rarity": "uncommon",
-    "power": 2000,
-    "health": 2200,
-    "speed": 2400,
-    "description": "La vraie reine."
-  },
-  {
-    "name": "Iida Tenya",
-    "anime": "My Hero Academia",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b89222-TL8MQM3wJgEB.png",
-    "rarity": "uncommon",
-    "power": 2300,
-    "health": 2200,
-    "speed": 3000,
-    "description": "Moteur intégré."
-  },
-  {
-    "name": "Jean Kirstein",
-    "anime": "Attack on Titan",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b46498-ritqAj9FW6jX.png",
-    "rarity": "uncommon",
-    "power": 2400,
-    "health": 2300,
-    "speed": 2500,
-    "description": "Leader naturel malgré lui."
-  },
-  {
-    "name": "Kageyama Tobio",
-    "anime": "Haikyuu",
-    "image_url": "https://myanimelist.net/images/characters/13/417874.jpg",
-    "rarity": "uncommon",
-    "power": 2200,
-    "health": 2000,
-    "speed": 2600,
-    "description": "Le roi du terrain."
-  },
-  {
-    "name": "Kanao Tsuyuri",
-    "anime": "Demon Slayer",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b139038-OcOoDUyLEsRn.png",
-    "rarity": "uncommon",
-    "power": 2700,
-    "health": 2500,
-    "speed": 3000,
-    "description": "Œil de fleur."
-  },
-  {
-    "name": "Kirishima Eijiro",
-    "anime": "My Hero Academia",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b89243-QLmUyyZk5K2l.png",
-    "rarity": "uncommon",
-    "power": 2600,
-    "health": 3000,
-    "speed": 2000,
-    "description": "Durcissement."
-  },
-  {
-    "name": "Leorio Paradinight",
-    "anime": "Hunter x Hunter",
-    "image_url": "https://myanimelist.net/images/characters/11/549311.jpg",
-    "rarity": "uncommon",
-    "power": 2200,
-    "health": 2400,
-    "speed": 2000,
-    "description": "Futur médecin déterminé."
-  },
-  {
-    "name": "Misa Amane",
-    "anime": "Death Note",
-    "image_url": "https://myanimelist.net/images/characters/5/30971.jpg",
-    "rarity": "uncommon",
-    "power": 1600,
-    "health": 1800,
-    "speed": 2000,
-    "description": "Le second Kira."
-  },
-  {
-    "name": "Momo Yaoyorozu",
-    "anime": "My Hero Academia",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b89241-Q8KzAfX4Qe2y.png",
-    "rarity": "uncommon",
-    "power": 2500,
-    "health": 2400,
-    "speed": 2000,
-    "description": "Création de toutes pièces."
-  },
-  {
-    "name": "Nami",
-    "anime": "One Piece",
-    "image_url": "https://myanimelist.net/images/characters/8/627117.jpg",
-    "rarity": "uncommon",
-    "power": 1800,
-    "health": 2000,
-    "speed": 2700,
-    "description": "La navigatrice aux millions."
-  },
-  {
-    "name": "Neji Hyuga",
-    "anime": "Naruto",
-    "image_url": "https://myanimelist.net/images/characters/2/105538.jpg",
-    "rarity": "uncommon",
-    "power": 2700,
-    "health": 2400,
-    "speed": 2800,
-    "description": "Destin et Paume des huit trigrammes."
-  },
-  {
-    "name": "Nezuko Kamado",
-    "anime": "Demon Slayer",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b127518-NRlq1CQ1v1ro.png",
-    "rarity": "uncommon",
-    "power": 2800,
-    "health": 2900,
-    "speed": 2700,
-    "description": "Démon au cœur humain."
-  },
-  {
-    "name": "Nico Robin",
-    "anime": "One Piece",
-    "image_url": "https://myanimelist.net/images/characters/16/363700.jpg",
-    "rarity": "uncommon",
-    "power": 2500,
-    "health": 2200,
-    "speed": 2100,
-    "description": "Fleur-Fleur."
-  },
-  {
-    "name": "Nobara Kugisaki",
-    "anime": "Jujutsu Kaisen",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b133700-f6sOO3TcgLV6.png",
-    "rarity": "uncommon",
-    "power": 2900,
-    "health": 2600,
-    "speed": 2400,
-    "description": "Maillet et clous."
-  },
-  {
-    "name": "Piccolo",
-    "anime": "Dragon Ball Z",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b914-KuS8AWjqBrqa.jpg",
-    "rarity": "uncommon",
-    "power": 2900,
-    "health": 2700,
-    "speed": 2500,
-    "description": "Démon Namékien."
-  },
-  {
-    "name": "Reiner Braun",
-    "anime": "Attack on Titan",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b46484-P6A2GjNQn49F.png",
-    "rarity": "uncommon",
-    "power": 2800,
-    "health": 3000,
-    "speed": 2200,
-    "description": "Titan cuirassé."
-  },
-  {
-    "name": "Riza Hawkeye",
-    "anime": "Fullmetal Alchemist Brotherhood",
-    "image_url": "https://myanimelist.net/images/characters/3/451785.jpg",
-    "rarity": "uncommon",
-    "power": 2600,
-    "health": 2300,
-    "speed": 2500,
-    "description": "Sniper de l'armée."
-  },
-  {
-    "name": "Ryuk",
-    "anime": "Death Note",
-    "image_url": "https://myanimelist.net/images/characters/10/59125.jpg",
-    "rarity": "uncommon",
-    "power": 2500,
-    "health": 2800,
-    "speed": 2300,
-    "description": "Les pommes et l'ennui."
-  },
-  {
-    "name": "Shikamaru Nara",
-    "anime": "Naruto",
-    "image_url": "https://s4.anilist.co/file/anilistcdn/character/large/b2007-QaesJlIZDifj.jpg",
-    "rarity": "uncommon",
-    "power": 2000,
-    "health": 2100,
-    "speed": 1800,
-    "description": "Trop fatigant."
-  },
-  {
-    "name": "Shinji Ikari",
-    "anime": "Neon Genesis Evangelion",
-    "image_url": "https://myanimelist.net/images/characters/5/225177.jpg",
-    "rarity": "uncommon",
-    "power": 2100,
-    "health": 1900,
-    "speed": 1800,
-    "description": "Monte dans l'Evangelion."
-  },
-  {
-    "name": "Suguru Geto",
-    "anime": "Jujutsu Kaisen",
-    "image_url": "https://myanimelist.net/images/characters/7/619361.jpg",
-    "rarity": "uncommon",
-    "power": 2900,
-    "health": 2700,
-    "speed": 2500,
-    "description": "Manipulation des fléaux."
-  },
-  {
-    "name": "Winry Rockbell",
-    "anime": "Fullmetal Alchemist Brotherhood",
-    "image_url": "https://myanimelist.net/images/characters/15/84336.jpg",
-    "rarity": "uncommon",
-    "power": 1200,
-    "health": 1800,
-    "speed": 1700,
-    "description": "Mécano passionnée."
   }
 ]
