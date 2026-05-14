@@ -38,7 +38,8 @@ async function acceptTrade(tradeId, receiverId, guildId) {
   await batch([
     { sql: 'UPDATE user_cards SET user_id = ? WHERE id = ?', args: [trade.receiver_id, trade.sender_card_id]   },
     { sql: 'UPDATE user_cards SET user_id = ? WHERE id = ?', args: [trade.sender_id,   trade.receiver_card_id] },
-    { sql: `UPDATE trades SET status = 'accepted', updated_at = unixepoch() WHERE id = ?`, args: [tradeId]     },
+    // ← updated_at retiré
+    { sql: `UPDATE trades SET status = 'accepted' WHERE id = ?`, args: [tradeId] },
   ]);
 
   return { ok: true, trade };
@@ -46,7 +47,7 @@ async function acceptTrade(tradeId, receiverId, guildId) {
 
 async function declineTrade(tradeId, userId, guildId) {
   const result = await run(`
-    UPDATE trades SET status = 'declined', updated_at = unixepoch()
+    UPDATE trades SET status = 'declined'
     WHERE id = ? AND guild_id = ? AND (sender_id = ? OR receiver_id = ?) AND status = 'pending'
   `, tradeId, guildId, userId, userId);
 
