@@ -21,7 +21,8 @@ module.exports = {
       option.setName('utilisateur')
         .setDescription('Utilisateur ciblé (vous-même par défaut)')
         .setRequired(false)
-    ),
+    )
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
   name: 'reset-cd',
   aliases: ['resetcd', 'reset-cooldown'],

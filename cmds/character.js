@@ -40,7 +40,7 @@ module.exports = {
       .addFields(
         { name: '✨ Rareté',    value: rarity.label,         inline: true },
         { name: '⚔️ Puissance', value: `${character.power}`, inline: true },
-        { name: '👥 Possédé',   value: `${owned?.count ?? 0} fois`, inline: true },
+        //{ name: '👥 Possédé',   value: `${owned?.count ?? 0} fois`, inline: true },
       )
       .setFooter({ text: `Demandé par ${ctx.user.username}` })
       .setTimestamp();
