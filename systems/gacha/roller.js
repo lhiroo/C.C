@@ -116,15 +116,23 @@ function pickCharacter(rarity) {
 
 // ── getOrCreateUser optimisé ───────────────────────────────────
 async function getOrCreateUser(userId, guildId, username) {
-  // INSERT OR IGNORE évite le SELECT conditionnel
-  await run(
-    'INSERT OR IGNORE INTO gacha_users (id, guild_id, username) VALUES (?, ?, ?)',
-    userId, guildId, username
-  );
-  return await get(
+  let user = await get(
     'SELECT * FROM gacha_users WHERE id = ? AND guild_id = ?',
     userId, guildId
   );
+
+  if (!user) {
+    await run(
+      `INSERT INTO gacha_users (id, guild_id, username) VALUES (?, ?, ?)`,
+      userId, guildId, username
+    );
+    user = await get(
+      'SELECT * FROM gacha_users WHERE id = ? AND guild_id = ?',
+      userId, guildId
+    );
+  }
+
+  return user;
 }
 
 
