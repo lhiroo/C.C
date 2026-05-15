@@ -4,7 +4,7 @@ const CATEGORIES = {
   moderation: {
     emoji: '🛡️',
     label: 'Modération',
-    cmds: ['ban', 'kick', 'mute', 'unmute', 'warn', 'warnlist', 'clear', 'slowmode', 'nuke', 'lock', 'unlock'],
+    cmds: ['ban', 'kick', 'mute', 'roulette', 'unmute', 'warn', 'warnlist', 'clear', 'slowmode', 'nuke', 'lock', 'unlock'],
   },
   vocal: {
     emoji: '🔊',
@@ -19,12 +19,17 @@ const CATEGORIES = {
   fun: {
     emoji: '🎮',
     label: 'Fun',
-    cmds: ['8ball', 'coinflip', 'ship', 'roulette'],
+    cmds: ['8ball', 'coinflip', 'ship'],
   },
   utilitaire: {
     emoji: '🔧',
     label: 'Utilitaire',
     cmds: ['config', 'ping', 'pp', 'userinfo', 'poll', 'remind', 'giveaway', 'confess'],
+  },
+  gacha: {
+    emoji: '🎴',
+    label: 'Gacha',
+    cmds: ['roll', 'collection', 'gprofile', 'trade', 'character-list', 'gacha-leaderboard'],
   },
 };
 
@@ -40,6 +45,7 @@ module.exports = {
          { name: '🎵 Musique',    value: 'musique'    },
          { name: '🎮 Fun',        value: 'fun'        },
          { name: '🔧 Utilitaire', value: 'utilitaire' },
+         { name: '🎴 Gacha',      value: 'gacha'      },
        )
     ),
 
@@ -59,7 +65,6 @@ module.exports = {
       return ctx.editReply({ embeds: [embed] });
     }
 
-    // Vue globale
     const total = Object.values(CATEGORIES).reduce((acc, cat) => acc + cat.cmds.length, 0);
 
     const embed = new EmbedBuilder()

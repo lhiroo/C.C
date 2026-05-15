@@ -235,6 +235,14 @@ client.once('clientReady', async () => {
   console.log(`✅ ${client.user.tag} est en ligne`);
   console.log(`📡 Connecté sur ${client.guilds.cache.size} serveur(s)`);
 
+  client.user.setPresence({
+    activities: [{
+      name: '/help • /conifg',
+      type: 0
+    }],
+    status: 'online'
+  });
+
   await seedCharacters();
   await loadCharacterCache();
 
