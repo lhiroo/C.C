@@ -88,8 +88,8 @@ module.exports = {
     .setName('character-list')
     .setDescription('Affiche la liste complète des personnages'),
 
-  name: 'characterlist',
-  aliases: ['chars', 'persos', 'list', 'characters'],
+  name: 'character-list',
+  aliases: ['chars', 'persos', 'list', 'characters', 'characterlist'],
 
   async execute(ctx) {
     await ctx.defer();
