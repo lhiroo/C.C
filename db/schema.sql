@@ -1,13 +1,14 @@
 CREATE TABLE IF NOT EXISTS gacha_users (
-  id          TEXT PRIMARY KEY,
-  guild_id    TEXT NOT NULL,
-  username    TEXT,
-  roll_count  INTEGER DEFAULT 0,
-  roll_reset  INTEGER DEFAULT 0,
-  last_claim  INTEGER DEFAULT 0,
+  id           TEXT NOT NULL,
+  guild_id     TEXT NOT NULL,
+  username     TEXT,
+  roll_count   INTEGER DEFAULT 0,
+  roll_reset   INTEGER DEFAULT 0,
+  last_claim   INTEGER DEFAULT 0,
   total_rolls  INTEGER DEFAULT 0,
   total_claims INTEGER DEFAULT 0,
-  created_at  INTEGER DEFAULT (unixepoch())
+  created_at   INTEGER DEFAULT (unixepoch()),
+  PRIMARY KEY (id, guild_id)        -- ← composite key
 );
 
 CREATE TABLE IF NOT EXISTS characters (
@@ -39,8 +40,8 @@ CREATE TABLE IF NOT EXISTS active_rolls (
   message_id   TEXT,
   character_id INTEGER NOT NULL,
   rolled_by    TEXT NOT NULL,
-  claimed_by TEXT DEFAULT NULL,
-  claimed_at INTEGER DEFAULT NULL,
+  claimed_by   TEXT DEFAULT NULL,
+  claimed_at   INTEGER DEFAULT NULL,
   expires_at   INTEGER NOT NULL,
   created_at   INTEGER DEFAULT (unixepoch()),
   FOREIGN KEY (character_id) REFERENCES characters(id)
@@ -55,6 +56,7 @@ CREATE TABLE IF NOT EXISTS trades (
   receiver_card_id INTEGER NOT NULL,
   status           TEXT DEFAULT 'pending',
   created_at       INTEGER DEFAULT (unixepoch()),
+  updated_at       INTEGER,                        -- ← ajouté
   FOREIGN KEY (sender_card_id)   REFERENCES user_cards(id),
   FOREIGN KEY (receiver_card_id) REFERENCES user_cards(id)
 );

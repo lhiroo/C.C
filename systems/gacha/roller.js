@@ -116,21 +116,21 @@ function pickCharacter(rarity) {
 
 // ── getOrCreateUser optimisé ───────────────────────────────────
 async function getOrCreateUser(userId, guildId, username) {
-  let user = await get(
+  // Upsert : crée ou met à jour sans jamais planter
+  await run(
+    `INSERT INTO gacha_users (id, guild_id, username)
+     VALUES (?, ?, ?)
+     ON CONFLICT(id, guild_id) DO UPDATE SET username = excluded.username`,
+    userId, guildId, username
+  );
+
+  const user = await get(
     'SELECT * FROM gacha_users WHERE id = ? AND guild_id = ?',
     userId, guildId
   );
 
-  if (!user) {
-    await run(
-      `INSERT INTO gacha_users (id, guild_id, username) VALUES (?, ?, ?)`,
-      userId, guildId, username
-    );
-    user = await get(
-      'SELECT * FROM gacha_users WHERE id = ? AND guild_id = ?',
-      userId, guildId
-    );
-  }
+  // Dernier filet de sécurité
+  if (!user) throw new Error(`Impossible de créer l'utilisateur ${userId} pour le guild ${guildId}`);
 
   return user;
 }
@@ -170,7 +170,9 @@ function checkClaimCooldown(user) {
 
 // ── Roll optimisé ──────────────────────────────────────────────
 async function roll(userId, guildId, channelId, username) {
-  const user    = await getOrCreateUser(userId, guildId, username);
+  const user = await getOrCreateUser(userId, guildId, username);
+  if (!user) return { ok: false, reason: '❌ Erreur interne : profil introuvable.' };
+
   const cdCheck = await checkRollCooldown(user);
   if (!cdCheck.ok) return { ok: false, reason: cdCheck.reason };
 
