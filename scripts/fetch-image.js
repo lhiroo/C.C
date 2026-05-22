@@ -95,7 +95,7 @@ async function run() {
 
   const result = await db.execute(`
     SELECT id, name, anime, image_url FROM characters
-    WHERE image_url LIKE 'PLACEHOLDER_%'
+    WHERE image_url LIKE 'PLACEHOLDER'
   `);
 
   const chars = result.rows;
